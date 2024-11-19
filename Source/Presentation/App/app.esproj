@@ -6,6 +6,10 @@
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
     <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
   </PropertyGroup>
+  <PropertyGroup>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
   <ItemGroup>
     <Script Include="**" Exclude="*.esproj;**\node_modules\**" />
   </ItemGroup>
