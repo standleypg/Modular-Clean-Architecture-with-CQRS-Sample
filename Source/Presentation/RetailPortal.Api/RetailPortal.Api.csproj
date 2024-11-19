@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <RootNamespace>RetailPortal.Api</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\RetailPortal.Core\RetailPortal.Core.csproj" />
+    <ProjectReference Include="..\..\Core\RetailPortal.Application\RetailPortal.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\RetailPortal.Infrastructure\RetailPortal.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Shared\RetailPortal.Shared\RetailPortal.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

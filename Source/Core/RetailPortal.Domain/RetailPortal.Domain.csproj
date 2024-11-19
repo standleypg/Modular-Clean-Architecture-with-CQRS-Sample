@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\RetailPortal.Shared\RetailPortal.Shared.csproj" />
+    <ProjectReference Include="..\RetailPortal.Core\RetailPortal.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RootNamespace>RetailPortal.Core</RootNamespace>
+  </PropertyGroup>
+
+</Project>

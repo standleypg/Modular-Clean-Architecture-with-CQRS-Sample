@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net9.0": {
+      "Microsoft.AspNetCore.OpenApi": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "FqUK5j1EOPNuFT7IafltZQ3cakqhSwVzH5ZW1MhZDe4pPXs9sJ2M5jom1Omsu+mwF2tNKKlRAzLRHQTZzbd+6Q==",
+        "dependencies": {
+          "Microsoft.OpenApi": "1.6.17"
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "+6f2qv2a3dLwd5w6JanPIPs47CxRbnk+ZocMJUhv9NxP88VlOcJYZs9jY+MYSjxvady08bUZn6qgiNh7DadGgg=="
+      },
+      "Microsoft.OpenApi": {
+        "type": "Transitive",
+        "resolved": "1.6.17",
+        "contentHash": "Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA=="
+      },
+      "retailportal.application": {
+        "type": "Project",
+        "dependencies": {
+          "RetailPortal.Core": "[1.0.0, )",
+          "RetailPortal.Domain": "[1.0.0, )",
+          "RetailPortal.Shared": "[1.0.0, )"
+        }
+      },
+      "retailportal.core": {
+        "type": "Project"
+      },
+      "retailportal.domain": {
+        "type": "Project",
+        "dependencies": {
+          "RetailPortal.Core": "[1.0.0, )",
+          "RetailPortal.Shared": "[1.0.0, )"
+        }
+      },
+      "retailportal.infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "RetailPortal.Application": "[1.0.0, )",
+          "RetailPortal.Core": "[1.0.0, )",
+          "RetailPortal.Domain": "[1.0.0, )",
+          "RetailPortal.Shared": "[1.0.0, )"
+        }
+      },
+      "retailportal.shared": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "[9.0.0, )"
+        }
+      }
+    }
+  }
+}

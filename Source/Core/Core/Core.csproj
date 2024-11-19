@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj" />
-  </ItemGroup>
-
-</Project>

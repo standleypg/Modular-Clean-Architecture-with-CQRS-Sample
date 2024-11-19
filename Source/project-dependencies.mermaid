@@ -1,0 +1,60 @@
+graph TB
+    subgraph Core["Core Layer"]
+        Core.Contracts["e-commerce.Core"]
+        Core.Domain["e-commerce.Domain"]
+        Core.Application["e-commerce.Application"]
+    end
+
+    subgraph Infrastructure["Infrastructure Layer"]
+        Infra.Main["e-commerce.Infrastructure"]
+        Infra.Messaging["e-commerce.Infrastructure.Messaging"]
+    end
+
+    subgraph Presentation["Presentation Layer"]
+        Present.API["e-commerce.API"]
+        Present.Web["e-commerce.Web"]
+    end
+
+    Shared["e-commerce.Shared"]
+
+    %% Core Dependencies
+    Core.Domain --> Core.Contracts
+    Core.Domain --> Shared
+    Core.Application --> Core.Contracts
+    Core.Application --> Core.Domain
+    Core.Application --> Shared
+
+    %% Infrastructure Dependencies
+    Infra.Main --> Core.Contracts
+    Infra.Main --> Core.Domain
+    Infra.Main --> Core.Application
+    Infra.Main --> Shared
+
+    Infra.Messaging --> Core.Contracts
+    Infra.Messaging --> Core.Domain
+    Infra.Messaging --> Core.Application
+    Infra.Messaging --> Shared
+
+    %% Presentation Dependencies
+    Present.API --> Core.Contracts
+    Present.API --> Core.Application
+    Present.API --> Infra.Main
+    Present.API --> Infra.Messaging
+    Present.API --> Shared
+
+    Present.Web --> Core.Contracts
+    Present.Web --> Core.Application
+    Present.Web --> Infra.Main
+    Present.Web --> Infra.Messaging
+    Present.Web --> Shared
+
+    %% Styling
+    classDef coreStyle fill:#d0f4de,stroke:#333,stroke-width:2px
+    classDef infraStyle fill:#e4c1f9,stroke:#333,stroke-width:2px
+    classDef presentStyle fill:#f4d1ae,stroke:#333,stroke-width:2px
+    classDef sharedStyle fill:#7dc4f0,stroke:#333,stroke-width:2px
+
+    class Core.Contracts,Core.Domain,Core.Application coreStyle
+    class Infra.Main,Infra.Messaging infraStyle
+    class Present.API,Present.Web presentStyle
+    class Shared sharedStyle
