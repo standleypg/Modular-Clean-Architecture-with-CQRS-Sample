@@ -1,0 +1,45 @@
+graph TB
+    subgraph Core["Core Layer"]
+        Core.Contracts["ProjectName.Core"]
+        Core.Domain["ProjectName.Domain"]
+        Core.Application["ProjectName.Application"]
+    end
+
+    subgraph Infrastructure["Infrastructure Layer"]
+        Infra.Main["ProjectName.Infrastructure"]
+    end
+
+    subgraph Presentation["Presentation Layer"]
+        Present.API["ProjectName.API"]
+        Present.Web["ProjectName.Web"]
+    end
+
+    Shared["ProjectName.Shared"]
+
+    %% Core Dependencies
+    Core.Domain --> Core.Contracts
+    Core.Domain --> Shared
+    Core.Application --> Core.Contracts
+    Core.Application --> Core.Domain
+    Core.Application --> Shared
+
+    %% Infrastructure Dependencies
+    Infrastructure --> Core
+    Infrastructure --> Shared
+
+    %% Presentation Dependencies
+    Presentation --> Core.Contracts
+    Presentation --> Core.Application
+    Presentation --> Infrastructure
+    Presentation --> Shared
+
+    %% Styling
+    classDef coreStyle fill:#0da146,stroke:#333,stroke-width:2px
+    classDef infraStyle fill:#7a14b8,stroke:#333,stroke-width:2px
+    classDef presentStyle fill:#bf670f,stroke:#333,stroke-width:2px
+    classDef sharedStyle fill:#1774ad,stroke:#333,stroke-width:2px
+
+    class Core.Contracts,Core.Domain,Core.Application coreStyle
+    class Infra.Main infraStyle
+    class Present.API,Present.Web presentStyle
+    class Shared sharedStyle
