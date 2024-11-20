@@ -5,6 +5,10 @@
     <ProjectReference Include="..\RetailPortal.Core\RetailPortal.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Common\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <RootNamespace>RetailPortal.Core</RootNamespace>
   </PropertyGroup>
