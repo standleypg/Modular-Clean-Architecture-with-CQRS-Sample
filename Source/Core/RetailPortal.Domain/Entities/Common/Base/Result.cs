@@ -2,8 +2,8 @@ namespace RetailPortal.Core.Entities.Common.Base;
 
 public class Result<T>
 {
-    public T? Value { get; }
-    private string? Error { get; }
+    public T Value { get; }
+    public string? Error { get; }
     public bool IsSuccess => this.Error == null;
 
     private Result(T value)
@@ -14,10 +14,10 @@ public class Result<T>
 
     private Result(string error)
     {
-        this.Value = default;
+        this.Value = default!;
         this.Error = error;
     }
 
-    public static Result<T> Success(T value) => new Result<T>(value);
-    public static Result<T> Failure(string error) => new Result<T>(error);
+    public static Result<T> Success(T value) => new (value);
+    public static Result<T> Failure(string error) => new (error);
 }

@@ -1,7 +1,11 @@
+using RetailPortal.Api;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services.AddApi();
 
 var app = builder.Build();
 
