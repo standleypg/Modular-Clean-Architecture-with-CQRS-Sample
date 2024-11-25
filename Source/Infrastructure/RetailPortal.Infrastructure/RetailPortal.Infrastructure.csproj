@@ -5,7 +5,28 @@
     <ProjectReference Include="..\..\Core\RetailPortal.Domain\RetailPortal.Domain.csproj" />
     <ProjectReference Include="..\..\Shared\RetailPortal.Shared\RetailPortal.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+  </ItemGroup>
   <PropertyGroup>
     <RootNamespace>RetailPortal.Infrastructure</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Db\Sql\Tables\Role\Role_v0.sql" />
+    <None Remove="Db\Sql\Tables\Category\Category_v0.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Db\Sql\Tables\Role\Role_v0.sql" />
+    <EmbeddedResource Include="Db\Sql\Tables\Category\Category_v0.sql" />
+  </ItemGroup>
 </Project>

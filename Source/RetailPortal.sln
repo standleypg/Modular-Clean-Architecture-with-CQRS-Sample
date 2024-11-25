@@ -29,13 +29,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Core", "Core\RetailPortal.Core\RetailPortal.Core.csproj", "{19B42C59-3B55-46F4-8E58-1069A82C13F1}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "..\Docker\docker-compose.dcproj", "{9CB4280B-C088-4110-94DC-604FB0A0C279}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{60A9DF3B-BF1F-460B-925E-C2809F09A3C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -70,6 +69,13 @@ Global
 		{19B42C59-3B55-46F4-8E58-1069A82C13F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19B42C59-3B55-46F4-8E58-1069A82C13F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19B42C59-3B55-46F4-8E58-1069A82C13F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB4280B-C088-4110-94DC-604FB0A0C279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB4280B-C088-4110-94DC-604FB0A0C279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{60A9DF3B-BF1F-460B-925E-C2809F09A3C2} = {B6CD2B27-56FB-4BB1-BADB-28895EE71DBC}
