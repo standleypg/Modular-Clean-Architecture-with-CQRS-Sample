@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Core", "Core\RetailPortal.Core\RetailPortal.Core.csproj", "{19B42C59-3B55-46F4-8E58-1069A82C13F1}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9CB4280B-C088-4110-94DC-604FB0A0C279}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "..\Docker\docker-compose.dcproj", "{9CB4280B-C088-4110-94DC-604FB0A0C279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -48,7 +48,7 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
                 j =>
                 {
                     j.HasKey("UserId", "RoleId");
-                    j.Property<DateTime>("AssignedDate").HasDefaultValueSql("GETDATE()");
+                    j.Property<DateTime>("AssignedDate").HasDefaultValueSql("NOW()");
                 });
     }
 }

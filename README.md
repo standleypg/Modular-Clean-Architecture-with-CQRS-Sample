@@ -2,13 +2,29 @@
 
 ## Disclaimer
 
-**🚨 Template Disclaimer**
+**🚨 Template Disclaimer is still in progress**
 
 This repository provides a comprehensive template for implementing a Modular Clean Architecture with CQRS. It serves as a starting point and best-practice reference for building scalable, maintainable .NET applications.
 
+## Getting Started
+
+### Development Environment Setup
+
+- Install .NET 9 SDK or later
+- Install Docker Desktop
+- Docker Compose is provided for running the database
+
+```bash
+# run the database
+# cd to Docker folder
+docker compose -f docker-compose.yml -p docker up -d postgres
+```
+
+- Run the application
+
 ## Template Structure Overview
 
-```
+```plaintext
 Solution/
 ├── src/
 │   ├── Core/                   # Core business logic and contracts

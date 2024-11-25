@@ -5,10 +5,9 @@ namespace RetailPortal.Api;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApi(this IServiceCollection services)
+    public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
     {
-        SqlHelper.GetSqlFromFile("Tables", "Role", "v0");
-        services.AddInfrastructure();
+        services.AddInfrastructure(configuration);
         return services;
     }
 }

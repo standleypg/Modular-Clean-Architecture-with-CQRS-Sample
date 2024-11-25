@@ -1,0 +1,17 @@
+services:
+# Uncomment the following lines to run/debug the RetailPortal.Api service in a container
+#  retailportal.api:
+#    image: ${DOCKER_REGISTRY-}retailportalapi
+#    build:
+#      context: .
+#      dockerfile: Presentation/RetailPortal.Api/Dockerfile
+  
+  postgres:
+    container_name: retailportal-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: retailportal
+      POSTGRES_PASSWORD: retailportal
+      POSTGRES_DB: retailportal
+    ports:
+      - "5432:5432"
