@@ -351,18 +351,14 @@
       "retailportal.application": {
         "type": "Project",
         "dependencies": {
-          "RetailPortal.Core": "[1.0.0, )",
+          "MediatR": "[12.4.1, )",
           "RetailPortal.Domain": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },
-      "retailportal.core": {
-        "type": "Project"
-      },
       "retailportal.domain": {
         "type": "Project",
         "dependencies": {
-          "RetailPortal.Core": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },
