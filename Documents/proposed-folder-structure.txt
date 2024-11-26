@@ -1,147 +1,162 @@
 Solution/
 ├── src/
-│   ├── Core/
-│   │   ├── CompanyName.ProjectName.Core/
-│   │   │   ├── Contracts/
-│   │   │   │   ├── Application/
-│   │   │   │   │   ├── Commands/
-│   │   │   │   │   │   └── ICommandHandler.cs
-│   │   │   │   │   ├── Queries/
-│   │   │   │   │   │   └── IQueryHandler.cs
-│   │   │   │   │   ├── Services/
-│   │   │   │   │   │   ├── IOrderProcessingService.cs
-│   │   │   │   │   │   └── IUserRegistrationService.cs
-│   │   │   │   │   ├── Repositories/
-│   │   │   │   │   │   ├── IGenericRepository.cs
-│   │   │   │   │   │   ├── IOrderRepository.cs
-│   │   │   │   │   │   └── ICustomerRepository.cs
-│   │   │   │   │   └── Infrastructure/
-│   │   │   │   │       ├── IEmailService.cs
-│   │   │   │   │       ├── ICacheService.cs
-│   │   │   │   │       ├── IPaymentGateway.cs
-│   │   │   │   │       └── ILoggingService.cs
-│   │   │   │   └── Domain/
-│   │   │   │       ├── Events/
-│   │   │   │       │   ├── IDomainEvent.cs
-│   │   │   │       │   └── IDomainEventHandler.cs
-│   │   │   │       └── Services/
-│   │   │   │           ├── IDiscountCalculationService.cs
-│   │   │   │           └── IPricingService.cs
-│   │   │   ├── Constants/
-│   │   │   │   ├── OrderStatus.cs
-│   │   │   │   └── PaymentStatus.cs
-│   │   │   └── Exceptions/
-│   │   │       ├── DomainException.cs
-│   │   │       └── ApplicationException.cs
+│   ├── CompanyName.ProjectName.Domain/     # Domain Layer
+│   │   ├── Entities/
+│   │   │   ├── Base/
+│   │   │   │   ├── AuditableEntity.cs      # Tracks creation/modification dates
+│   │   │   │   └── Entity.cs               # Base entity with common properties
+│   │   │   ├── Order.cs
+│   │   │   ├── Customer.cs
+│   │   │   └── Product.cs
 │   │   │
-│   │   ├── CompanyName.ProjectName.Domain/
-│   │   │   ├── Entities/
-│   │   │   │   ├── Base/
-│   │   │   │   │   ├── AuditableEntity.cs
-│   │   │   │   │   └── Entity.cs
-│   │   │   │   ├── Order.cs
-│   │   │   │   ├── Customer.cs
-│   │   │   │   └── Product.cs
-│   │   │   ├── Events/
-│   │   │   │   ├── OrderCreatedEvent.cs
-│   │   │   │   └── OrderPaidEvent.cs
+│   │   ├── Interfaces/                     # Domain Interfaces
+│   │   │   ├── Repositories/
+│   │   │   │   ├── IGenericRepository.cs
+│   │   │   │   ├── IOrderRepository.cs
+│   │   │   │   └── ICustomerRepository.cs
+│   │   │   └── Services/
+│   │   │       ├── IDiscountCalculationService.cs
+│   │   │       └── IPricingService.cs
+│   │   │
+│   │   ├── Events/                         # Domain Events
+│   │   │   ├── IDomainEvent.cs
+│   │   │   ├── OrderCreatedEvent.cs
+│   │   │   └── OrderPaidEvent.cs
+│   │   │
+│   │   ├── Exceptions/                     # Domain-specific Exceptions
+│   │   │   ├── DomainException.cs
+│   │   │   └── ValidationException.cs
+│   │   │
+│   │   ├── Constants/                      # Domain Constants
+│   │   │   ├── OrderStatus.cs
+│   │   │   └── PaymentStatus.cs
+│   │   │
+│   │   └── ValueObjects/                   # Immutable Value Objects
+│   │       ├── Address.cs
+│   │       ├── Money.cs
+│   │       └── Email.cs
+│   │
+│   ├── CompanyName.ProjectName.Application/ # Application Layer
+│   │   ├── Interfaces/                     # Application Contracts
 │   │   │   ├── Services/
-│   │   │   │   └── Implementations/
-│   │   │   │       ├── DiscountCalculationService.cs
-│   │   │   │       └── PricingService.cs
-│   │   │   └── ValueObjects/
-│   │   │       ├── Address.cs
-│   │   │       ├── Money.cs
-│   │   │       └── Email.cs
+│   │   │   │   ├── IOrderProcessingService.cs
+│   │   │   │   └── IUserRegistrationService.cs
+│   │   │   └── Infrastructure/
+│   │   │       ├── IEmailService.cs
+│   │   │       ├── ICacheService.cs
+│   │   │       ├── IPaymentGateway.cs
+│   │   │       └── ILoggingService.cs
 │   │   │
-│   │   └── CompanyName.ProjectName.Application/
-│   │       ├── Commands/
-│   │       │   ├── CreateOrder/
-│   │       │   │   ├── CreateOrderCommand.cs
-│   │       │   │   ├── CreateOrderCommandHandler.cs
-│   │       │   │   └── CreateOrderCommandValidator.cs
-│   │       │   └── UpdateOrder/
-│   │       │       ├── UpdateOrderCommand.cs
-│   │       │       ├── UpdateOrderCommandHandler.cs
-│   │       │       └── UpdateOrderCommandValidator.cs
-│   │       ├── Queries/
-│   │       │   ├── GetOrder/
-│   │       │   │   ├── GetOrderQuery.cs
-│   │       │   │   ├── GetOrderQueryHandler.cs
-│   │       │   │   └── OrderDto.cs
-│   │       │   └── GetOrders/
-│   │       │       ├── GetOrdersQuery.cs
-│   │       │       ├── GetOrdersQueryHandler.cs
-│   │       │       └── OrderListDto.cs
-│   │       ├── Behaviors/
-│   │       │   ├── LoggingBehavior.cs
-│   │       │   ├── ValidationBehavior.cs
-│   │       │   └── CachingBehavior.cs
-│   │       └── Services/
-│   │           └── Implementations/
-│   │               ├── OrderProcessingService.cs
-│   │               └── UserRegistrationService.cs
-│   │
-│   ├── Infrastructure/
-│   │   ├── CompanyName.ProjectName.Infrastructure/
-│   │   │   ├── Data/
-│   │   │   │   ├── Configurations/
-│   │   │   │   │   ├── OrderConfiguration.cs
-│   │   │   │   │   └── CustomerConfiguration.cs
-│   │   │   │   ├── Context/
-│   │   │   │   │   └── ApplicationDbContext.cs
-│   │   │   │   ├── Repositories/
-│   │   │   │   │   ├── GenericRepository.cs
-│   │   │   │   │   ├── OrderRepository.cs
-│   │   │   │   │   └── CustomerRepository.cs
-│   │   │   │   └── UnitOfWork/
-│   │   │   │       └── UnitOfWork.cs
-│   │   │   ├── Services/
-│   │   │   │   ├── EmailService.cs
-│   │   │   │   ├── CacheService.cs
-│   │   │   │   └── PaymentGateway.cs
-│   │   │   └── Logging/
-│   │   │       └── LoggingService.cs
+│   │   ├── Commands/                       # CQRS Commands
+│   │   │   ├── CreateOrder/
+│   │   │   │   ├── CreateOrderCommand.cs
+│   │   │   │   ├── CreateOrderCommandHandler.cs
+│   │   │   │   └── CreateOrderCommandValidator.cs
+│   │   │   └── UpdateOrder/
+│   │   │       ├── UpdateOrderCommand.cs
+│   │   │       ├── UpdateOrderCommandHandler.cs
+│   │   │       └── UpdateOrderCommandValidator.cs
 │   │   │
-│   │   └── CompanyName.ProjectName.Infrastructure.Messaging/
-│   │       ├── Publishers/
-│   │       │   └── EventPublisher.cs
-│   │       └── Subscribers/
-│   │           └── EventSubscriber.cs
-│   │
-│   ├── Presentation/
-│   │   ├── CompanyName.ProjectName.API/
-│   │   │   ├── Controllers/
-│   │   │   │   ├── BaseController.cs
-│   │   │   │   ├── OrdersController.cs
-│   │   │   │   └── CustomersController.cs
-│   │   │   ├── Filters/
-│   │   │   │   ├── ApiExceptionFilter.cs
-│   │   │   │   └── ValidationFilter.cs
-│   │   │   ├── Middleware/
-│   │   │   │   ├── ExceptionMiddleware.cs
-│   │   │   │   └── RequestLoggingMiddleware.cs
-│   │   │   ├── Program.cs
-│   │   │   └── appsettings.json
+│   │   ├── Queries/                        # CQRS Queries
+│   │   │   ├── GetOrder/
+│   │   │   │   ├── GetOrderQuery.cs
+│   │   │   │   ├── GetOrderQueryHandler.cs
+│   │   │   │   └── OrderDto.cs
+│   │   │   └── GetOrders/
+│   │   │       ├── GetOrdersQuery.cs
+│   │   │       ├── GetOrdersQueryHandler.cs
+│   │   │       └── OrderListDto.cs
 │   │   │
-│   │   └── CompanyName.ProjectName.Web/
-│   │       ├── Pages/
-│   │       ├── Components/
-│   │       ├── Program.cs
-│   │       └── appsettings.json
+│   │   ├── Behaviors/                      # Mediator Behaviors
+│   │   │   ├── LoggingBehavior.cs
+│   │   │   ├── ValidationBehavior.cs
+│   │   │   └── CachingBehavior.cs
+│   │   │
+│   │   ├── Services/                       # Application Services
+│   │   │   └── Implementations/
+│   │   │       ├── OrderProcessingService.cs
+│   │   │       └── UserRegistrationService.cs
+│   │   │
+│   │   └── Common/                         # Shared Application Utilities
+│   │       ├── Mappings/                   # Object Mapping Profiles
+│   │       │   └── MappingProfile.cs
+│   │       └── Helpers/                    # Application-level Helpers
+│   │           └── DateTimeHelper.cs
 │   │
-│   └── CompanyName.ProjectName.Shared/
-│       ├── DTOs/
+│   ├── CompanyName.ProjectName.Infrastructure/ # Infrastructure Layer
+│   │   ├── Persistence/                    # Data Access
+│   │   │   ├── Configurations/             # EF Core Configurations
+│   │   │   │   ├── OrderConfiguration.cs
+│   │   │   │   └── CustomerConfiguration.cs
+│   │   │   ├── Context/                    # Database Contexts
+│   │   │   │   └── ApplicationDbContext.cs
+│   │   │   ├── Repositories/               # Repository Implementations
+│   │   │   │   ├── GenericRepository.cs
+│   │   │   │   ├── OrderRepository.cs
+│   │   │   │   └── CustomerRepository.cs
+│   │   │   └── UnitOfWork/                 # Transaction Management
+│   │   │       └── UnitOfWork.cs
+│   │   │
+│   │   ├── Services/                       # External Service Implementations
+│   │   │   ├── EmailService.cs
+│   │   │   ├── CacheService.cs
+│   │   │   └── PaymentGateway.cs
+│   │   │
+│   │   ├── Logging/                        # Logging Implementations
+│   │   │   └── LoggingService.cs
+│   │   │
+│   │   ├── Messaging/                      # Messaging Infrastructure
+│   │   │   ├── Publishers/
+│   │   │   │   └── EventPublisher.cs
+│   │   │   └── Subscribers/
+│   │   │       └── EventSubscriber.cs
+│   │   │
+│   │   └── DependencyInjection.cs          # IoC Container Configuration
+│   │
+│   ├── CompanyName.ProjectName.API/        # Presentation Layer - Web API
+│   │   ├── Controllers/
+│   │   │   ├── BaseController.cs
+│   │   │   ├── OrdersController.cs
+│   │   │   └── CustomersController.cs
+│   │   │
+│   │   ├── Filters/                        # API Filters
+│   │   │   ├── ApiExceptionFilter.cs
+│   │   │   └── ValidationFilter.cs
+│   │   │
+│   │   ├── Middleware/                     # Request Processing Middleware
+│   │   │   ├── ExceptionMiddleware.cs
+│   │   │   └── RequestLoggingMiddleware.cs
+│   │   │
+│   │   ├── Configuration/                  # API Configuration
+│   │   │   ├── SwaggerConfiguration.cs
+│   │   │   └── CorsConfiguration.cs
+│   │   │
+│   │   ├── Program.cs
+│   │   └── appsettings.json
+│   │
+│   ├── CompanyName.ProjectName.Web/        # Web Frontend (Optional)
+│   │   ├── Pages/
+│   │   ├── Components/
+│   │   ├── Program.cs
+│   │   └── appsettings.json
+│   │
+│   └── CompanyName.ProjectName.Shared/     # Shared Components
+│       ├── DTOs/                           # Data Transfer Objects
 │       │   ├── Commands/
 │       │   │   ├── CreateOrderDto.cs
 │       │   │   └── UpdateOrderDto.cs
 │       │   └── Queries/
 │       │       └── OrderDto.cs
-│       └── Utils/
-│           ├── Guard.cs
-│           └── Extensions.cs
+│       │
+│       └── Utils/                          # Utility Classes
+│           ├── Guard.cs                    # Argument Validation
+│           ├── Extensions/                 # Extension Methods
+│           │   ├── StringExtensions.cs
+│           │   └── CollectionExtensions.cs
+│           └── Constants/                  # Global Constants
+│               └── GlobalConstants.cs
 │
-└── tests/
+└── tests/                                  # Test Projects
     ├── CompanyName.ProjectName.Domain.Tests/
     │   ├── Entities/
     │   │   ├── OrderTests.cs
@@ -162,3 +177,12 @@ Solution/
     └── CompanyName.ProjectName.API.Tests/
         └── Controllers/
             └── OrdersControllerTests.cs
+
+# Additional Solution-level Files
+├── Solution.sln
+├── README.md
+├── LICENSE
+├── Directory.Build.props
+├── Directory.Packages.props
+├── global.json
+└── .editorconfig

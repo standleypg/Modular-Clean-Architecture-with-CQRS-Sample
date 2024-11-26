@@ -1,6 +1,5 @@
 graph TB
     subgraph Core["Core Layer"]
-        Core.Contracts["ProjectName.Core"]
         Core.Domain["ProjectName.Domain"]
         Core.Application["ProjectName.Application"]
     end
@@ -14,12 +13,13 @@ graph TB
         Present.Web["ProjectName.Web"]
     end
 
-    Shared["ProjectName.Shared"]
+    subgraph Shared["Shared Layer"]
+        Shared.Main["ProjectName.Shared"]
+        Shared.DTOs["DTOs"]
+    end
 
     %% Core Dependencies
-    Core.Domain --> Core.Contracts
     Core.Domain --> Shared
-    Core.Application --> Core.Contracts
     Core.Application --> Core.Domain
     Core.Application --> Shared
 
@@ -28,7 +28,6 @@ graph TB
     Infrastructure --> Shared
 
     %% Presentation Dependencies
-    Presentation --> Core.Contracts
     Presentation --> Core.Application
     Presentation --> Infrastructure
     Presentation --> Shared
