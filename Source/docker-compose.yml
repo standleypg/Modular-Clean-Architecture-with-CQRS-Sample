@@ -1,6 +1,0 @@
-services:
-  retailportal.api:
-    image: ${DOCKER_REGISTRY-}retailportalapi
-    build:
-      context: .
-      dockerfile: Presentation/RetailPortal.Api/Dockerfile
