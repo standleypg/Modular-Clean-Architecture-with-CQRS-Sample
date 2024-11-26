@@ -3,7 +3,8 @@
   "dependencies": {
     "net9.0": {
       "MediatR": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[12.4.1, )",
         "resolved": "12.4.1",
         "contentHash": "0tLxCgEC5+r1OCuumR3sWyiVa+BMv3AgiU4+pz8xqTc+2q1WbUEXFOr7Orm96oZ9r9FsldgUtWvB2o7b9jDOaw==",
         "dependencies": {
@@ -21,13 +22,9 @@
         "resolved": "9.0.0",
         "contentHash": "+6f2qv2a3dLwd5w6JanPIPs47CxRbnk+ZocMJUhv9NxP88VlOcJYZs9jY+MYSjxvady08bUZn6qgiNh7DadGgg=="
       },
-      "retailportal.core": {
-        "type": "Project"
-      },
       "retailportal.domain": {
         "type": "Project",
         "dependencies": {
-          "RetailPortal.Core": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },

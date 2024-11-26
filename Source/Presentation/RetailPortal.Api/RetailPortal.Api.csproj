@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\RetailPortal.Core\RetailPortal.Core.csproj" />
     <ProjectReference Include="..\..\Core\RetailPortal.Application\RetailPortal.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\RetailPortal.Infrastructure\RetailPortal.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\RetailPortal.Shared\RetailPortal.Shared.csproj" />
