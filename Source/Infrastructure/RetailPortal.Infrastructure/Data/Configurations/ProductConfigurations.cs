@@ -36,7 +36,8 @@ public class ProductConfigurations: IEntityTypeConfiguration<Product>
         });
 
         builder.Property(p => p.ImageUrl)
-            .IsRequired()
+            .HasDefaultValue(null)
+            .IsRequired(false)
             .HasMaxLength(200);
 
         builder.Property(p => p.CategoryId)

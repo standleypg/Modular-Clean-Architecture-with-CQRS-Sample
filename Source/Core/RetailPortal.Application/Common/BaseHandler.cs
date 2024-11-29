@@ -1,6 +1,6 @@
 ﻿using RetailPortal.Core.Interfaces.UnitOfWork;
 
-namespace RetailPortal.Application.Shared;
+namespace RetailPortal.Application.Common;
 
 public class BaseHandler(IUnitOfWork uow)
 {
