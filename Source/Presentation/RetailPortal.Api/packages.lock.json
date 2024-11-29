@@ -38,6 +38,29 @@
         "resolved": "1.21.0",
         "contentHash": "8NudeHOE56YsY59HYY89akRMup8Ho+7Y3cADTGjajjWroXVU9RQai2nA6PfteB8AuzmRHZ5NZQB2BnWhQEul5g=="
       },
+      "FluentValidation": {
+        "type": "Transitive",
+        "resolved": "11.11.0",
+        "contentHash": "cyIVdQBwSipxWG8MA3Rqox7iNbUNUTK5bfJi9tIdm4CAfH71Oo5ABLP4/QyrUwuakqpUEPGtE43BDddvEehuYw=="
+      },
+      "FluentValidation.AspNetCore": {
+        "type": "Transitive",
+        "resolved": "11.3.0",
+        "contentHash": "jtFVgKnDFySyBlPS8bZbTKEEwJZnn11rXXJ2SQnjDhZ56rQqybBg9Joq4crRLz3y0QR8WoOq4iE4piV81w/Djg==",
+        "dependencies": {
+          "FluentValidation": "11.5.1",
+          "FluentValidation.DependencyInjectionExtensions": "11.5.1"
+        }
+      },
+      "FluentValidation.DependencyInjectionExtensions": {
+        "type": "Transitive",
+        "resolved": "11.5.1",
+        "contentHash": "iWM0LS1MDYX06pcjMEQKqHirl2zkjHlNV23mEJSoR1IZI7KQmTa0RcTtGEJpj5+iHvBCfrzP2mYKM4FtRKVb+A==",
+        "dependencies": {
+          "FluentValidation": "11.5.1",
+          "Microsoft.Extensions.Dependencyinjection.Abstractions": "2.1.0"
+        }
+      },
       "Humanizer.Core": {
         "type": "Transitive",
         "resolved": "2.14.1",
@@ -361,14 +384,20 @@
       "retailportal.application": {
         "type": "Project",
         "dependencies": {
-          "MediatR": "[12.4.1, )",
+          "FluentValidation": "[11.11.0, )",
+          "FluentValidation.AspNetCore": "[11.3.0, )",
+          "RetailPortal.Core": "[1.0.0, )",
           "RetailPortal.Domain": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },
+      "retailportal.core": {
+        "type": "Project"
+      },
       "retailportal.domain": {
         "type": "Project",
         "dependencies": {
+          "RetailPortal.Core": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },
@@ -377,6 +406,7 @@
         "dependencies": {
           "Npgsql.EntityFrameworkCore.PostgreSQL": "[9.0.1, )",
           "RetailPortal.Application": "[1.0.0, )",
+          "RetailPortal.Core": "[1.0.0, )",
           "RetailPortal.Domain": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }

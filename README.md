@@ -28,7 +28,6 @@ docker compose -f docker-compose.yml -p docker up -d postgres
 Solution/
 ├── src/
 │   ├── Core/                   # Core business logic and contracts
-│   │   ├── CompanyName.ProjectName.Core/
 │   │   ├── CompanyName.ProjectName.Domain/
 │   │   └── CompanyName.ProjectName.Application/
 │   ├── Infrastructure/         # Technical implementations
