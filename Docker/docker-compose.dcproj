@@ -13,4 +13,7 @@
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config.json" />
+  </ItemGroup>
 </Project>
