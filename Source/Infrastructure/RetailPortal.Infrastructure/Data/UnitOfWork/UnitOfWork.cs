@@ -9,10 +9,13 @@ namespace RetailPortal.Infrastructure.Data.UnitOfWork;
 public class UnitOfWork(ApplicationDbContext context)
     : IUnitOfWork, IAsyncDisposable
 {
-    private IDbContextTransaction _transaction;
+    private IDbContextTransaction? _currentTransaction;
     private IUserRepository _userRepository;
-
     public IUserRepository UserRepository => this._userRepository ??= new UserRepository(context);
+    private IProductRepository _productRepository;
+    public IProductRepository ProductRepository => this._productRepository ??= new ProductRepository(context);
+    private IRoleRepository _roleRepository;
+    public IRoleRepository RoleRepository => this._roleRepository ??= new RoleRepository(context);
 
     public async Task<int> SaveChangesAsync()
     {
@@ -21,38 +24,64 @@ public class UnitOfWork(ApplicationDbContext context)
 
     public async Task BeginTransactionAsync()
     {
-        this._transaction = await context.Database.BeginTransactionAsync();
+        if (this._currentTransaction != null) return;
+        this._currentTransaction = await context.Database.BeginTransactionAsync();
     }
 
     public async Task CommitAsync()
     {
         try
         {
-            await this.SaveChangesAsync();
-            await this._transaction.CommitAsync();
+            if (this._currentTransaction == null) return;
+
+            await context.SaveChangesAsync();
+            await this._currentTransaction.CommitAsync();
         }
         catch
         {
             await this.RollbackAsync();
             throw;
         }
+        finally
+        {
+            if (this._currentTransaction != null)
+            {
+                await this._currentTransaction.DisposeAsync();
+                this._currentTransaction = null;
+            }
+        }
     }
 
     public async Task RollbackAsync()
     {
-        await this._transaction.RollbackAsync();
-        await this.DisposeAsync();
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await context.DisposeAsync();
-        await this._transaction.DisposeAsync();
+        try
+        {
+            if (this._currentTransaction != null)
+            {
+                await this._currentTransaction.RollbackAsync();
+            }
+        }
+        finally
+        {
+            if (this._currentTransaction != null)
+            {
+                await this._currentTransaction.DisposeAsync();
+                this._currentTransaction = null;
+            }
+        }
     }
 
     public void Dispose()
     {
         context.Dispose();
-        this._transaction.Dispose();
+        if (this._currentTransaction != null)
+        {
+            this._currentTransaction.Dispose();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await context.DisposeAsync();
     }
 }

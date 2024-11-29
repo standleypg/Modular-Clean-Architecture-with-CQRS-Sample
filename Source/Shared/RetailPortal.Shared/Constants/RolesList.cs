@@ -1,4 +1,4 @@
-namespace RetailPortal.Core.Entities.Constants;
+namespace RetailPortal.Shared.Constants;
 
 public abstract class RolesList
 {

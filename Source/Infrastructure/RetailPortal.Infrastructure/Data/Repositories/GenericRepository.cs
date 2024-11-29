@@ -1,18 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RetailPortal.Core.Entities.Common.Base;
+using RetailPortal.Core.Interfaces.Repositories;
 using RetailPortal.Infrastructure.Data.Context;
 
 namespace RetailPortal.Infrastructure.Data.Repositories;
-
-public interface IGenericRepository<T> where T : class
-{
-    Task<Result<T>> GetByIdAsync(int id, CancellationToken cancellationToken);
-    Task<Result<IReadOnlyList<T>>> GetAllAsync(CancellationToken cancellationToken);
-    Task AddAsync(T entity, CancellationToken cancellationToken);
-    Task Update(T entity);
-    Task Delete(T entity);
-}
-
 public class GenericRepository<T>(ApplicationDbContext context) : IGenericRepository<T>
     where T : class
 {
@@ -29,9 +20,10 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
         return Result<IReadOnlyList<T>>.Success(result);
     }
 
-    public async Task AddAsync(T entity, CancellationToken cancellationToken)
+    public async Task<Result<T>> AddAsync(T entity, CancellationToken cancellationToken)
     {
         await context.Set<T>().AddAsync(entity, cancellationToken);
+        return Result<T>.Success(entity);
     }
 
     public async Task Update(T entity)

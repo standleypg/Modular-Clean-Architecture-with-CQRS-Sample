@@ -1,6 +1,6 @@
 using RetailPortal.Core.Entities.Common.Base;
 using RetailPortal.Core.Entities.Common.ValueObjects;
-using RetailPortal.Core.Entities.Constants;
+using RetailPortal.Shared.Constants;
 using System.Text.Json.Serialization;
 
 namespace RetailPortal.Core.Entities;

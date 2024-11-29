@@ -37,6 +37,7 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
         builder.HasOne(u => u.Seller)
             .WithOne(s => s.User)
             .HasForeignKey<Seller>(s => s.UserId)
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(u => u.Roles)

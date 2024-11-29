@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="..\RetailPortal.Core\RetailPortal.Core.csproj" />
       <ProjectReference Include="..\RetailPortal.Domain\RetailPortal.Domain.csproj" />
       <ProjectReference Include="..\..\Shared\RetailPortal.Shared\RetailPortal.Shared.csproj" />
     </ItemGroup>

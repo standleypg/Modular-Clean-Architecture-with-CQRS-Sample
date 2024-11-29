@@ -28,8 +28,7 @@
         }
       },
       "MediatR": {
-        "type": "Direct",
-        "requested": "[12.4.1, )",
+        "type": "Transitive",
         "resolved": "12.4.1",
         "contentHash": "0tLxCgEC5+r1OCuumR3sWyiVa+BMv3AgiU4+pz8xqTc+2q1WbUEXFOr7Orm96oZ9r9FsldgUtWvB2o7b9jDOaw==",
         "dependencies": {

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RetailPortal.Core.Interfaces.Repositories;
 using RetailPortal.Core.Interfaces.UnitOfWork;
 using RetailPortal.Infrastructure.Data.Context;
 using RetailPortal.Infrastructure.Data.Repositories;

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using RetailPortal.Application.Shared;
+using RetailPortal.Application.Common;
 using System.Reflection;
 
 namespace RetailPortal.Application;
@@ -19,11 +19,10 @@ public static class ServiceCollectionsExtensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>), 0);
+            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>), ServiceLifetime.Scoped);
         });
 
         services.AddTransient<BaseHandler>();
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 
         return services;
     }

@@ -15,7 +15,6 @@ WORKDIR /src
 COPY ["Directory.Build.props", "."]
 COPY ["Directory.Build.targets", "."]
 COPY ["Presentation/RetailPortal.Api/RetailPortal.Api.csproj", "Presentation/RetailPortal.Api/"]
-COPY ["Core/RetailPortal.Core/RetailPortal.Core.csproj", "Core/RetailPortal.Core/"]
 COPY ["Core/RetailPortal.Application/RetailPortal.Application.csproj", "Core/RetailPortal.Application/"]
 COPY ["Core/RetailPortal.Domain/RetailPortal.Domain.csproj", "Core/RetailPortal.Domain/"]
 COPY ["Shared/RetailPortal.Shared/RetailPortal.Shared.csproj", "Shared/RetailPortal.Shared/"]
