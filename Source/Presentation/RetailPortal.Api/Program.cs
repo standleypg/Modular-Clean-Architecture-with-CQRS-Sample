@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
 
 builder.Services
     .AddApi()
@@ -16,14 +15,7 @@ builder.Services
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/openapi/v1.json", "Retail Portal API");
-    });
-}
+app.AddApi();
 
 app.UseHttpsRedirection();
 

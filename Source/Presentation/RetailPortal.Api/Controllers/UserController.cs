@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
@@ -9,13 +10,13 @@ using RetailPortal.Shared.DTOs.User;
 
 namespace RetailPortal.Api.Controllers;
 
+[ApiVersion("0.0")]
 [ApiController]
-[Route("api/v0.0/users")]
+[Route("api/v{version:apiVersion}/users")]
 public class UserController(ISender sender, IMapper mapper): BaseController
 {
     /// <summary>
     /// POST: api/v0.0/users
-    /// TODO: Implement Automapper for mapping DTOs to Entities
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
