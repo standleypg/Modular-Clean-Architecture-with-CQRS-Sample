@@ -16,7 +16,7 @@ public static class SqlHelper
         using var file = assembly.GetManifestResourceStream($"RetailPortal.Infrastructure.Db.Sql.{folderName}.{resourceName}.{fileName}");
         if (file == null)
         {
-            throw new FileNotFoundException(fileName);
+            throw new FileNotFoundException($"{fileName} not found in {folderName}. Make sure the file exists and is an embedded resource.");
         }
 
         using var reader = new StreamReader(file, Encoding.UTF8);
