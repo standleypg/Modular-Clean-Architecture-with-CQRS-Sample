@@ -1,5 +1,5 @@
-﻿using RetailPortal.Core.Entities;
-using RetailPortal.Core.Interfaces.Repositories;
+﻿using RetailPortal.Core.Interfaces.Repositories;
+using RetailPortal.Domain.Entities;
 using RetailPortal.Infrastructure.Data.Context;
 
 namespace RetailPortal.Infrastructure.Data.Repositories;

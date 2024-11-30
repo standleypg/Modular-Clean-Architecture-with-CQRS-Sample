@@ -1,4 +1,4 @@
-﻿using RetailPortal.Core.Entities;
+﻿using RetailPortal.Domain.Entities;
 
 namespace RetailPortal.Core.Interfaces.Repositories;
 

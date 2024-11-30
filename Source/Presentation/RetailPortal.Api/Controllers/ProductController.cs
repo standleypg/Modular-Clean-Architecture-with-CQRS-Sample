@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Commands.CreateProduct;
-using RetailPortal.Core.Entities;
 using RetailPortal.Shared.DTOs;
+using RetailPortal.Shared.DTOs.Product;
 
 namespace RetailPortal.Api.Controllers;
 

@@ -43,6 +43,14 @@
           "Npgsql": "9.0.1"
         }
       },
+      "AutoMapper": {
+        "type": "Transitive",
+        "resolved": "13.0.1",
+        "contentHash": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        }
+      },
       "ErrorOr": {
         "type": "Transitive",
         "resolved": "2.0.1",
@@ -379,6 +387,7 @@
       "retailportal.application": {
         "type": "Project",
         "dependencies": {
+          "AutoMapper": "[13.0.1, )",
           "FluentValidation": "[11.11.0, )",
           "FluentValidation.AspNetCore": "[11.3.0, )",
           "RetailPortal.Domain": "[1.0.0, )",

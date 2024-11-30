@@ -1,6 +1,6 @@
-using RetailPortal.Core.Entities.Common.Base;
+using RetailPortal.Domain.Entities.Common.Base;
 
-namespace RetailPortal.Core.Entities.Common.ValueObjects;
+namespace RetailPortal.Domain.Entities.Common.ValueObjects;
 
 public class AverageRating : ValueObject
 {

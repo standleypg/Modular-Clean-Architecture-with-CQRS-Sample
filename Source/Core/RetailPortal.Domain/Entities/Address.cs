@@ -1,7 +1,6 @@
-using ErrorOr;
-using RetailPortal.Core.Entities.Common.Base;
+using RetailPortal.Domain.Entities.Common.Base;
 
-namespace RetailPortal.Core.Entities;
+namespace RetailPortal.Domain.Entities;
 
 public class Address : EntityBase
 {
@@ -11,7 +10,7 @@ public class Address : EntityBase
     public string PostalCode { get; private set; }
     public string Country { get; private set; }
 
-    public string FullAddress => $"{Street}, {City}, {State}, {PostalCode}, {Country}";
+    public string FullAddress => $"{this.Street}, {this.City}, {this.State}, {this.PostalCode}, {this.Country}";
 
     public Guid? UserId { get; private set; }
     public User? User { get; private set; }

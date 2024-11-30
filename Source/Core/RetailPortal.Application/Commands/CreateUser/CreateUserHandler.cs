@@ -1,16 +1,18 @@
-﻿using ErrorOr;
+﻿using AutoMapper;
+using ErrorOr;
 using MediatR;
+using RetailPortal.Application.Commands.AddUser;
 using RetailPortal.Application.Common;
-using RetailPortal.Core.Entities;
-using RetailPortal.Core.Entities.Common.Base;
 using RetailPortal.Core.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Entities;
 using RetailPortal.Shared.Constants;
+using RetailPortal.Shared.DTOs.User;
 
-namespace RetailPortal.Application.Commands.AddUser;
+namespace RetailPortal.Application.Commands.CreateUser;
 
-public class AddUserHandler(IUnitOfWork uow): BaseHandler(uow), IRequestHandler<AddUserCommand, ErrorOr<User>>
+public class CreateUserHandler(IUnitOfWork uow, IMapper mapper): BaseHandler(uow), IRequestHandler<CreateUserCommand, ErrorOr<CreateUserResponse>>
 {
-    public async Task<ErrorOr<User>> Handle(AddUserCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CreateUserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var user = User.Create(request.FirstName, request.LastName,request.Email, request.Password);
 
@@ -23,6 +25,6 @@ public class AddUserHandler(IUnitOfWork uow): BaseHandler(uow), IRequestHandler<
 
         var result = await this.Uow.UserRepository.AddAsync(user, cancellationToken);
 
-        return user;
+        return mapper.Map<CreateUserResponse>(result);
     }
 }

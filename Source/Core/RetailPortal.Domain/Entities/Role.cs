@@ -1,7 +1,7 @@
-using RetailPortal.Core.Entities.Common.Base;
+using RetailPortal.Domain.Entities.Common.Base;
 using System.Text.Json.Serialization;
 
-namespace RetailPortal.Core.Entities;
+namespace RetailPortal.Domain.Entities;
 
 public class Role : EntityBase
 {

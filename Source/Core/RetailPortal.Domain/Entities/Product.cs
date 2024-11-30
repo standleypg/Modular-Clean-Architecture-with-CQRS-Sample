@@ -1,7 +1,7 @@
-using RetailPortal.Core.Entities.Common.Base;
-using RetailPortal.Core.Entities.Common.ValueObjects;
+using RetailPortal.Domain.Entities.Common.Base;
+using RetailPortal.Domain.Entities.Common.ValueObjects;
 
-namespace RetailPortal.Core.Entities;
+namespace RetailPortal.Domain.Entities;
 
 public class Product: EntityBase
 {

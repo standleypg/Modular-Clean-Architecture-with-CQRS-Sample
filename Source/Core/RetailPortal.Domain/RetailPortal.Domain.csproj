@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <RootNamespace>RetailPortal.Core</RootNamespace>
+    <RootNamespace>RetailPortal.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>
