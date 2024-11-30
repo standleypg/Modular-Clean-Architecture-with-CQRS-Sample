@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Commands;
-using RetailPortal.Application.Commands.AddUser;
+using RetailPortal.Application.Commands.CreateUser;
 using RetailPortal.Shared.DTOs;
 using RetailPortal.Shared.DTOs.User;
 
@@ -17,15 +17,15 @@ public class UserController(ISender sender, IMapper mapper): BaseController
     /// POST: api/v0.0/users
     /// TODO: Implement Automapper for mapping DTOs to Entities
     /// </summary>
-    /// <param name="user"></param>
+    /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<ActionResult> CreateUserAsync([FromBody] CreateUserRequest user)
+    public async Task<ActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
     {
-        var result = await sender.Send(mapper.Map<CreateUserCommand>(user));
+        var result = await sender.Send(mapper.Map<CreateUserCommand>(request));
 
         return result.Match(
-            this.Ok,
+            user => this.Ok(mapper.Map<CreateUserResponse>(user)),
             this.Problem
         );
     }

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RetailPortal.Application.Commands.AddUser;
+namespace RetailPortal.Application.Commands.CreateUser;
 
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
