@@ -1,4 +1,4 @@
-﻿namespace RetailPortal.Core.Entities.Common.Base;
+﻿namespace RetailPortal.Domain.Entities.Common.Base;
 
 public abstract class ValueObject: IEquatable<ValueObject>
 {

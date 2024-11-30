@@ -1,7 +1,6 @@
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using RetailPortal.Core.Entities.Common.Base;
 
 namespace RetailPortal.Api.Controllers.Common;
 

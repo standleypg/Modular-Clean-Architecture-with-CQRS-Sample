@@ -1,7 +1,6 @@
 using ErrorOr;
 using FluentValidation;
 using MediatR;
-using RetailPortal.Core.Entities.Common.Base;
 
 namespace RetailPortal.Application.Common;
 

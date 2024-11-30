@@ -1,9 +1,9 @@
 ﻿using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Common;
-using RetailPortal.Core.Entities;
-using RetailPortal.Core.Entities.Common.ValueObjects;
 using RetailPortal.Core.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Entities;
+using RetailPortal.Domain.Entities.Common.ValueObjects;
 
 namespace RetailPortal.Application.Commands.CreateProduct;
 

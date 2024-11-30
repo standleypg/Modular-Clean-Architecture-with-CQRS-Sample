@@ -1,9 +1,8 @@
 ﻿using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Common;
-using RetailPortal.Core.Entities;
-using RetailPortal.Core.Entities.Common.Base;
 using RetailPortal.Core.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Entities;
 using RetailPortal.Shared.Constants;
 
 namespace RetailPortal.Application.Commands.AddUser;

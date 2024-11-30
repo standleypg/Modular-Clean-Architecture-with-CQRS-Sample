@@ -1,7 +1,7 @@
 using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Common;
-using RetailPortal.Core.Entities;
+using RetailPortal.Domain.Entities;
 
 namespace RetailPortal.Application.Commands.CreateProduct;
 

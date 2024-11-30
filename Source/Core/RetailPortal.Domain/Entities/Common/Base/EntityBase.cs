@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace RetailPortal.Core.Entities.Common.Base;
+namespace RetailPortal.Domain.Entities.Common.Base;
 
 public class EntityBase
 {

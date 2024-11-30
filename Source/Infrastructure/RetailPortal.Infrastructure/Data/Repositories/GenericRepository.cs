@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using Microsoft.EntityFrameworkCore;
-using RetailPortal.Core.Entities.Common.Base;
 using RetailPortal.Core.Interfaces.Repositories;
 using RetailPortal.Infrastructure.Data.Context;
 

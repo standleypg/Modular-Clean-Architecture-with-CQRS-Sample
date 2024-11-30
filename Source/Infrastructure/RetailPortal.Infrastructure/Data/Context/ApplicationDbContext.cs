@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using RetailPortal.Core.Entities;
+using RetailPortal.Domain.Entities;
 
 namespace RetailPortal.Infrastructure.Data.Context;
 

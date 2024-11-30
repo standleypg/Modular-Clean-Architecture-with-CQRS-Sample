@@ -1310,7 +1310,6 @@
         "dependencies": {
           "Npgsql.EntityFrameworkCore.PostgreSQL": "[9.0.1, )",
           "RetailPortal.Application": "[1.0.0, )",
-          "RetailPortal.Domain": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },
