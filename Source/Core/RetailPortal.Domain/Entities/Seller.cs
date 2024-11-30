@@ -17,11 +17,8 @@ public class Seller: EntityBase
         this.Products = new List<Product>();
     }
 
-    public static Result<Seller> Create(string businessName)
+    public static Seller Create(string businessName)
     {
-        if (string.IsNullOrWhiteSpace(businessName))
-            return Result<Seller>.Failure("Business name must not be empty");
-
-        return Result<Seller>.Success(new Seller(businessName));
+        return new Seller(businessName);
     }
 }

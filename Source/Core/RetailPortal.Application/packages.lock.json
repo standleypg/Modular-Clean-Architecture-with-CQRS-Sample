@@ -18,6 +18,11 @@
           "FluentValidation.DependencyInjectionExtensions": "11.5.1"
         }
       },
+      "ErrorOr": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "aje9lUVEAsusPFmaRcVM5EUqWBofd7hYtb9N8+ycgPYrtOzyFajMpzRgIO4uuiCllNLBc3x48+cpA+4v4koUDQ=="
+      },
       "FluentValidation.DependencyInjectionExtensions": {
         "type": "Transitive",
         "resolved": "11.5.1",
@@ -49,6 +54,7 @@
       "retailportal.domain": {
         "type": "Project",
         "dependencies": {
+          "ErrorOr": "[2.0.1, )",
           "RetailPortal.Shared": "[1.0.0, )"
         }
       },

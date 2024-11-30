@@ -11,11 +11,9 @@ public class Rating : ValueObject
         this.Value = value;
     }
 
-    public static Result<Rating> Create(int value)
+    public static Rating Create(int value)
     {
-        return value is >= 0 and <= 5
-            ? Result<Rating>.Failure("Rating must be between 0 and 5")
-            : Result<Rating>.Success(new Rating(value));
+        return new Rating(value);
     }
 
     public override IEnumerable<object> GetEqualityComponents()
