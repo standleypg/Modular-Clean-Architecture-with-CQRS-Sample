@@ -1,4 +1,4 @@
-﻿namespace RetailPortal.Shared.DTOs;
+﻿namespace RetailPortal.Shared.DTOs.Product;
 
 public record CreateProductRequest(
     string Name,

@@ -1,4 +1,6 @@
 using RetailPortal.Api;
+using RetailPortal.Application;
+using RetailPortal.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,10 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-builder.Services.AddApi(configuration);
+builder.Services
+    .AddApi()
+    .AddApplication()
+    .AddInfrastructure(configuration);
 
 var app = builder.Build();
 

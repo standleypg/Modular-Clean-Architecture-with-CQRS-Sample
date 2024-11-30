@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace RetailPortal.Application.Commands.AddUser;
 
-public class AddUserCommandValidator : AbstractValidator<AddUserCommand>
+public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
-    public AddUserCommandValidator()
+    public CreateUserCommandValidator()
     {
         this.RuleFor(x => x.FirstName)
             .NotEmpty()

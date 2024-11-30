@@ -1,4 +1,4 @@
-namespace RetailPortal.Api.Controllers.Common;
+namespace RetailPortal.Api.Common.Http;
 
 public static class HttpContextItemKeys
 {

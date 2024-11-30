@@ -1,16 +1,18 @@
-﻿using RetailPortal.Application;
-using RetailPortal.Infrastructure;
-using RetailPortal.Infrastructure.Db.Sql;
+﻿using System.Reflection;
 
 namespace RetailPortal.Api;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApi(this IServiceCollection services)
     {
-        services
-            .AddApplication()
-            .AddInfrastructure(configuration);
+        services.AddAutoMapper();
+        return services;
+    }
+
+    private static IServiceCollection AddAutoMapper(this IServiceCollection services)
+    {
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         return services;
     }
 }
