@@ -2,7 +2,6 @@ using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Common;
 using RetailPortal.Domain.Entities;
-using RetailPortal.Shared.DTOs.Product;
 
 namespace RetailPortal.Application.Commands.CreateProduct;
 
@@ -11,6 +10,6 @@ public record CreateProductCommand(
     string Description,
     PriceCommand Price,
     int Quantity
-) : IRequireTransaction, IRequest<ErrorOr<CreateProductResponse>>;
+) : IRequireTransaction, IRequest<ErrorOr<Product>>;
 
 public record PriceCommand(decimal Value, string Currency);

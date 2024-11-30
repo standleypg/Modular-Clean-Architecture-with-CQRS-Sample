@@ -5,13 +5,12 @@ using RetailPortal.Application.Common;
 using RetailPortal.Core.Interfaces.UnitOfWork;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
-using RetailPortal.Shared.DTOs.Product;
 
 namespace RetailPortal.Application.Commands.CreateProduct;
 
-public class CreateProductHandler(IUnitOfWork uow, IMapper mapper) : BaseHandler(uow), IRequestHandler<CreateProductCommand, ErrorOr<CreateProductResponse>>
+public class CreateProductHandler(IUnitOfWork uow, IMapper mapper) : BaseHandler(uow), IRequestHandler<CreateProductCommand, ErrorOr<Product>>
 {
-    public async Task<ErrorOr<CreateProductResponse>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Product>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var price = Price.Create(request.Price.Value, request.Price.Currency);
 
@@ -19,6 +18,6 @@ public class CreateProductHandler(IUnitOfWork uow, IMapper mapper) : BaseHandler
 
         var result = await this.Uow.ProductRepository.AddAsync(product, cancellationToken);
 
-        return mapper.Map<CreateProductResponse>(result);
+        return result;
     }
 }

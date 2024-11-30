@@ -5,9 +5,11 @@ public record CreateProductResponse
     Guid Id,
     string Name,
     string Description,
-    decimal Price,
+    Price Price,
     int Quantity,
     string? ImageUrl,
     Guid? CategoryId,
     Guid? SellerId
 );
+
+public record Price(decimal Value, string Currency);
