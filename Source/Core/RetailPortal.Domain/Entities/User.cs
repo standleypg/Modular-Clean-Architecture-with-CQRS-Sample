@@ -27,21 +27,9 @@ public class User : EntityBase
         this.Roles = new List<Role>();
     }
 
-    public static Result<User> Create(string firstName, string lastName, string email, string password)
+    public static User Create(string firstName, string lastName, string email, string password)
     {
-        if (string.IsNullOrWhiteSpace(firstName))
-            return Result<User>.Failure("First name must not be empty");
-
-        if (string.IsNullOrWhiteSpace(lastName))
-            return Result<User>.Failure("Last name must not be empty");
-
-        if (string.IsNullOrWhiteSpace(email))
-            return Result<User>.Failure("Email must not be empty");
-
-        if (string.IsNullOrWhiteSpace(password))
-            return Result<User>.Failure("Password must not be empty");
-
-        return Result<User>.Success(new User(firstName, lastName, email, password));
+        return new User(firstName, lastName, email, password);
     }
 
     public void AddRole(Role role)
@@ -55,15 +43,10 @@ public class User : EntityBase
     }
 
     // Add seller only if the user have a role of seller
-    public Result<User> AddSeller(Seller seller)
+    public User AddSeller(Seller seller)
     {
-        if (this.Roles.All(r => r.Name != RolesList.Seller))
-        {
-            return Result<User>.Failure("User must have a role of seller to add a seller");
-        }
-
         this.Seller = seller;
-        return Result<User>.Success(this);
+        return this;
 
     }
 }

@@ -27,17 +27,8 @@ public class Product: EntityBase
         this.ImageUrl = imageUrl;
     }
 
-    public static Result<Product> Create(string name, string description, Price price, int quantity, string? imageUrl)
+    public static Product Create(string name, string description, Price price, int quantity, string? imageUrl)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return Result<Product>.Failure("Name must not be empty");
-
-        if (string.IsNullOrWhiteSpace(description))
-            return Result<Product>.Failure("Description must not be empty");
-
-        if (quantity <= 0)
-            return Result<Product>.Failure("Quantity must be greater than 0");
-
-        return Result<Product>.Success(new Product(name, description, price, quantity, imageUrl));
+        return new Product(name, description, price, quantity, imageUrl);
     }
 }

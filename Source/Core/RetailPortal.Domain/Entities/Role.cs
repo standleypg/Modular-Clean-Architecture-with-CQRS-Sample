@@ -17,14 +17,8 @@ public class Role : EntityBase
         this.Users = new List<User>();
     }
 
-    public static Result<Role> Create(string name, string description)
+    public static Role Create(string name, string description)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return Result<Role>.Failure("Name must not be empty");
-
-        if (string.IsNullOrWhiteSpace(description))
-            return Result<Role>.Failure("Description must not be empty");
-
-        return Result<Role>.Success(new Role(name, description));
+        return new Role(name, description);
     }
 }

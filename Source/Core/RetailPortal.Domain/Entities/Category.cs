@@ -15,11 +15,8 @@ public class Category: EntityBase
         this.Products = new List<Product>();
     }
 
-    public static Result<Category> Create(string name)
+    public static Category Create(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return Result<Category>.Failure("Name must not be empty");
-
-        return Result<Category>.Success(new Category(name));
+        return new Category(name);
     }
 }

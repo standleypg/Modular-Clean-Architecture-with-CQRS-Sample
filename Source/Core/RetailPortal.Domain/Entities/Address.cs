@@ -1,3 +1,4 @@
+using ErrorOr;
 using RetailPortal.Core.Entities.Common.Base;
 
 namespace RetailPortal.Core.Entities;
@@ -24,23 +25,23 @@ public class Address : EntityBase
         this.Country = country;
     }
 
-    public static Result<Address> Create(string street, string city, string state, string postalCode, string country)
+    public static Address Create(string street, string city, string state, string postalCode, string country)
     {
-        if (string.IsNullOrWhiteSpace(street))
-            return Result<Address>.Failure("Street must not be empty");
+        // if (string.IsNullOrWhiteSpace(street))
+        //     return Result<Address>.Failure("Street must not be empty");
+        //
+        // if (string.IsNullOrWhiteSpace(city))
+        //     return Result<Address>.Failure("City must not be empty");
+        //
+        // if (string.IsNullOrWhiteSpace(state))
+        //     return Result<Address>.Failure("State must not be empty");
+        //
+        // if (string.IsNullOrWhiteSpace(postalCode))
+        //     return Result<Address>.Failure("Postal code must not be empty");
+        //
+        // if (string.IsNullOrWhiteSpace(country))
+        //     return Result<Address>.Failure("Country must not be empty");
 
-        if (string.IsNullOrWhiteSpace(city))
-            return Result<Address>.Failure("City must not be empty");
-
-        if (string.IsNullOrWhiteSpace(state))
-            return Result<Address>.Failure("State must not be empty");
-
-        if (string.IsNullOrWhiteSpace(postalCode))
-            return Result<Address>.Failure("Postal code must not be empty");
-
-        if (string.IsNullOrWhiteSpace(country))
-            return Result<Address>.Failure("Country must not be empty");
-
-        return Result<Address>.Success(new Address(street, city, state, postalCode, country));
+        return new Address(street, city, state, postalCode, country);
     }
 }

@@ -1,29 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ErrorOr;
+using Microsoft.EntityFrameworkCore;
 using RetailPortal.Core.Entities.Common.Base;
 using RetailPortal.Core.Interfaces.Repositories;
 using RetailPortal.Infrastructure.Data.Context;
 
 namespace RetailPortal.Infrastructure.Data.Repositories;
+
 public class GenericRepository<T>(ApplicationDbContext context) : IGenericRepository<T>
     where T : class
 {
-    public async Task<Result<T>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var result = await context.Set<T>().FindAsync([id], cancellationToken);
 
-        return result == null ? Result<T>.Failure("Entity not found") : Result<T>.Success(result);
+        if (result is null)
+        {
+            throw new KeyNotFoundException($"Entity of type {typeof(T).Name} with id {id} not found.");
+        }
+
+        return result;
     }
 
-    public async Task<Result<IReadOnlyList<T>>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var result = await context.Set<T>().ToListAsync(cancellationToken);
-        return Result<IReadOnlyList<T>>.Success(result);
+        return await context.Set<T>().ToListAsync(cancellationToken);
     }
 
-    public async Task<Result<T>> AddAsync(T entity, CancellationToken cancellationToken)
+    public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
     {
         await context.Set<T>().AddAsync(entity, cancellationToken);
-        return Result<T>.Success(entity);
+        return entity;
     }
 
     public async Task Update(T entity)
