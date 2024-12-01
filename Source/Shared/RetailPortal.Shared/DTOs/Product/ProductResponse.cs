@@ -1,6 +1,6 @@
 namespace RetailPortal.Shared.DTOs.Product;
 
-public record CreateProductResponse
+public record ProductResponse
 (
     Guid Id,
     string Name,

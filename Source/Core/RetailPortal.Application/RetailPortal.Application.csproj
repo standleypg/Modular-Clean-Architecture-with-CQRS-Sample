@@ -11,6 +11,10 @@
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Products\Queries\" />
+    </ItemGroup>
+
     <PropertyGroup>
         <RootNamespace>RetailPortal.Application</RootNamespace>
     </PropertyGroup>

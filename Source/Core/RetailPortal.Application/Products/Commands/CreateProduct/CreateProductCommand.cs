@@ -3,7 +3,7 @@ using MediatR;
 using RetailPortal.Application.Common;
 using RetailPortal.Domain.Entities;
 
-namespace RetailPortal.Application.Commands.CreateProduct;
+namespace RetailPortal.Application.Products.Commands.CreateProduct;
 
 public record CreateProductCommand(
     string Name,

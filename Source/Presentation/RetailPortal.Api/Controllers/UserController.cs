@@ -3,9 +3,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
-using RetailPortal.Application.Commands;
-using RetailPortal.Application.Commands.CreateUser;
-using RetailPortal.Shared.DTOs;
+using RetailPortal.Application.Users.Commands.CreateUser;
 using RetailPortal.Shared.DTOs.User;
 
 namespace RetailPortal.Api.Controllers;
@@ -26,7 +24,7 @@ public class UserController(ISender sender, IMapper mapper): BaseController
         var result = await sender.Send(mapper.Map<CreateUserCommand>(request));
 
         return result.Match(
-            user => this.Ok(mapper.Map<CreateUserResponse>(user)),
+            user => this.Ok(mapper.Map<UserResponse>(user)),
             this.Problem
         );
     }

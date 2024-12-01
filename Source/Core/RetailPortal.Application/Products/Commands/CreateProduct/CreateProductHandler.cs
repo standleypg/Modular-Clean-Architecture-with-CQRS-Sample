@@ -6,7 +6,7 @@ using RetailPortal.Core.Interfaces.UnitOfWork;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
 
-namespace RetailPortal.Application.Commands.CreateProduct;
+namespace RetailPortal.Application.Products.Commands.CreateProduct;
 
 public class CreateProductHandler(IUnitOfWork uow, IMapper mapper) : BaseHandler(uow), IRequestHandler<CreateProductCommand, ErrorOr<Product>>
 {

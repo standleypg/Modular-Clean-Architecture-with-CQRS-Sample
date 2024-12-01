@@ -6,7 +6,7 @@ using RetailPortal.Core.Interfaces.UnitOfWork;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Shared.Constants;
 
-namespace RetailPortal.Application.Commands.CreateUser;
+namespace RetailPortal.Application.Users.Commands.CreateUser;
 
 public class CreateUserHandler(IUnitOfWork uow, IMapper mapper): BaseHandler(uow), IRequestHandler<CreateUserCommand, ErrorOr<User>>
 {

@@ -3,7 +3,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
-using RetailPortal.Application.Commands.CreateProduct;
+using RetailPortal.Application.Products.Commands.CreateProduct;
 using RetailPortal.Shared.DTOs.Product;
 
 namespace RetailPortal.Api.Controllers;
@@ -21,7 +21,7 @@ public class ProductController(ISender sender, IMapper mapper) : BaseController
         var result = await sender.Send(mapper.Map<CreateProductCommand>(request));
 
         return result.Match(
-            product => this.Ok(mapper.Map<CreateProductResponse>(product)),
+            product => this.Ok(mapper.Map<ProductResponse>(product)),
             this.Problem
         );
     }

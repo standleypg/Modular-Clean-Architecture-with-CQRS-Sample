@@ -1,5 +1,5 @@
 using AutoMapper;
-using RetailPortal.Application.Commands.CreateUser;
+using RetailPortal.Application.Users.Commands.CreateUser;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Shared.DTOs;
 using RetailPortal.Shared.DTOs.User;
@@ -12,7 +12,7 @@ public class UserMappingConfig : Profile
     {
         this.CreateMap<CreateUserRequest, CreateUserCommand>();
 
-        this.CreateMap<User, CreateUserResponse>()
-            .ConstructUsing(user => new CreateUserResponse(user.Id, $"{user.FirstName} {user.LastName}", user.Email));
+        this.CreateMap<User, UserResponse>()
+            .ConstructUsing(user => new UserResponse(user.Id, $"{user.FirstName} {user.LastName}", user.Email));
     }
 }
