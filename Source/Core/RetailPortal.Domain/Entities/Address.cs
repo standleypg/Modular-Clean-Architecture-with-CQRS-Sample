@@ -2,7 +2,7 @@ using RetailPortal.Domain.Entities.Common.Base;
 
 namespace RetailPortal.Domain.Entities;
 
-public class Address : EntityBase
+public sealed class Address : EntityBase
 {
     public string Street { get; private set; }
     public string City { get; private set; }
