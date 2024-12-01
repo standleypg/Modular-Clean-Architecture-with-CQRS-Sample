@@ -3,7 +3,7 @@ using RetailPortal.Domain.Entities.Common.ValueObjects;
 
 namespace RetailPortal.Domain.Entities;
 
-public class Product: EntityBase
+public sealed class Product: EntityBase
 {
     public string Name { get; private set;}
     public string Description { get; private set;}

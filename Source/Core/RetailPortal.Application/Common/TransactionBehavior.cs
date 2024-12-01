@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RetailPortal.Core.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Interfaces.UnitOfWork;
 
 namespace RetailPortal.Application.Common;
 

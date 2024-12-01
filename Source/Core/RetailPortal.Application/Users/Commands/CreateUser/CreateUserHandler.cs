@@ -2,11 +2,11 @@
 using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Common;
-using RetailPortal.Core.Interfaces.UnitOfWork;
 using RetailPortal.Domain.Entities;
+using RetailPortal.Domain.Interfaces.UnitOfWork;
 using RetailPortal.Shared.Constants;
 
-namespace RetailPortal.Application.Commands.CreateUser;
+namespace RetailPortal.Application.Users.Commands.CreateUser;
 
 public class CreateUserHandler(IUnitOfWork uow, IMapper mapper): BaseHandler(uow), IRequestHandler<CreateUserCommand, ErrorOr<User>>
 {
@@ -14,7 +14,7 @@ public class CreateUserHandler(IUnitOfWork uow, IMapper mapper): BaseHandler(uow
     {
         var user = User.Create(request.FirstName, request.LastName,request.Email, request.Password);
 
-        var userRole = await this.Uow.RoleRepository.GetAllAsync(cancellationToken);
+        var userRole = this.Uow.RoleRepository.GetAll();
 
         // For now we just set the user role to user as default
         var role = userRole.FirstOrDefault(x => x.Name == RolesList.User);

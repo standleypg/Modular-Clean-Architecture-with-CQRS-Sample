@@ -2,7 +2,7 @@ using RetailPortal.Domain.Entities.Common.Base;
 
 namespace RetailPortal.Domain.Entities.Common.ValueObjects;
 
-public class Rating : ValueObject
+public sealed class Rating : ValueObject
 {
     public int Value { get; }
 

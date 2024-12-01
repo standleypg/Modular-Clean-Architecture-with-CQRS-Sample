@@ -1,6 +1,6 @@
 namespace RetailPortal.Shared.DTOs.User;
 
-public record CreateUserResponse
+public record UserResponse
 (
     Guid Id,
     string FullName,

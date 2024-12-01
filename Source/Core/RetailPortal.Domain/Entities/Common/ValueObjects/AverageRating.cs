@@ -2,7 +2,7 @@ using RetailPortal.Domain.Entities.Common.Base;
 
 namespace RetailPortal.Domain.Entities.Common.ValueObjects;
 
-public class AverageRating : ValueObject
+public sealed class AverageRating : ValueObject
 {
     private int TotalRating { get; }
     private int NumberOfRatings { get; }

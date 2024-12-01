@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace RetailPortal.Domain.Entities;
 
-public class Seller: EntityBase
+public sealed class Seller: EntityBase
 {
     public string? BusinessName { get; private set;}
     public Guid? UserId { get; private set;}

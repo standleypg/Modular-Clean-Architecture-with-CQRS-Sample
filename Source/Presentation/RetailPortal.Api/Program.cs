@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.OData;
 using RetailPortal.Api;
 using RetailPortal.Application;
 using RetailPortal.Infrastructure;
@@ -6,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddOData(options =>
+    options.Filter().Select().Expand().OrderBy().Count().SetMaxTop(1000)
+);
 
 builder.Services
     .AddApi()

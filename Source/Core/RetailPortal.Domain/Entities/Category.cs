@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace RetailPortal.Domain.Entities;
 
-public class Category: EntityBase
+public sealed class Category: EntityBase
 {
     public string Name { get; private set;}
     [JsonIgnore]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using RetailPortal.Core.Interfaces.Repositories;
-using RetailPortal.Core.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Interfaces.Repositories;
+using RetailPortal.Domain.Interfaces.UnitOfWork;
 using RetailPortal.Infrastructure.Data.Context;
 using RetailPortal.Infrastructure.Data.Repositories;
 
