@@ -7,6 +7,7 @@ using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Products.Commands.CreateProduct;
 using RetailPortal.Application.Products.Queries.GetAllProduct;
 using RetailPortal.Domain.Entities;
+using RetailPortal.Shared.DTOs.Common;
 using RetailPortal.Shared.DTOs.Product;
 
 namespace RetailPortal.Api.Controllers;
@@ -33,10 +34,10 @@ public class ProductController(ISender sender, IMapper mapper) : ODataBaseContro
     public async Task<ActionResult> GetAllProducts()
     {
         var options = this.Request.GetODataQueryOptions<Product>();
-        var result = await sender.Send(new GetAllProductCommand(options));
+        var result = await sender.Send(mapper.Map<GetAllProductCommand>(options));
 
         return result.Match(
-            this.Ok,
+            product => this.Ok(mapper.Map<ODataResponse<ProductResponse>>(product)),
             this.Problem
         );
     }

@@ -1,6 +1,7 @@
 using ErrorOr;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using RetailPortal.Shared.DTOs.Common;
 using System.Globalization;
 using System.Web;
@@ -18,18 +19,18 @@ public static class IQueryableExtensions
 
         // Get total count based on filtered data (before applying pagination)
         int? count = null;
-        if (options.Count?.Value == true)
+        if (options.Count.Value)
         {
             count = filteredData.Count();
         }
 
         // Apply $skip and $top after filtering
         var queriedData = options.ApplyTo(filteredData) as IQueryable<T>;
-        var result = await queriedData?.ToListAsync();
+        var result = await (queriedData ?? new List<T>().AsQueryable()).ToListAsync();
 
         // Determine next page URL if $top and $skip are provided
         string? nextPage = null;
-        if (result != null)
+        if (result.Count > 0)
         {
             nextPage = GetNextPageUri(options, filteredData);
         }
