@@ -14,5 +14,8 @@ public class ProductMappingConfig : Profile
 
            this.CreateMap<Product, ProductResponse>()
                .ConstructUsing(product => new ProductResponse(product.Id, product.Name, product.Description, new Price(product.Price.Value, product.Price.Currency), product.Quantity, product.ImageUrl, product.CategoryId, product.SellerId));
+
+           this.CreateMap<IEnumerable<Product>, IEnumerable<ProductResponse>>()
+               .ConstructUsing(products => products.Select(product => new ProductResponse(product.Id, product.Name, product.Description, new Price(product.Price.Value, product.Price.Currency), product.Quantity, product.ImageUrl, product.CategoryId, product.SellerId)));
     }
 }

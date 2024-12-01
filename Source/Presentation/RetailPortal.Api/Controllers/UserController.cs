@@ -11,7 +11,7 @@ namespace RetailPortal.Api.Controllers;
 [ApiVersion("0.0")]
 [ApiController]
 [Route("api/v{version:apiVersion}/users")]
-public class UserController(ISender sender, IMapper mapper): BaseController
+public class UserController(ISender sender, IMapper mapper): ODataBaseController
 {
     /// <summary>
     /// POST: api/v0.0/users

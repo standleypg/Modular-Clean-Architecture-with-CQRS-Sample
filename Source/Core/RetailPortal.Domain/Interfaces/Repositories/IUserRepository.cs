@@ -1,5 +1,5 @@
 ﻿using RetailPortal.Domain.Entities;
 
-namespace RetailPortal.Core.Interfaces.Repositories;
+namespace RetailPortal.Domain.Interfaces.Repositories;
 
 public interface IUserRepository: IGenericRepository<User>;

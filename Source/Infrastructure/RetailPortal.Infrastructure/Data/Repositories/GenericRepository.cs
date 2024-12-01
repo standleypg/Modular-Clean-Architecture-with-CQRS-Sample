@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using Microsoft.EntityFrameworkCore;
-using RetailPortal.Core.Interfaces.Repositories;
+using RetailPortal.Domain.Interfaces.Repositories;
 using RetailPortal.Infrastructure.Data.Context;
 
 namespace RetailPortal.Infrastructure.Data.Repositories;
@@ -20,9 +20,10 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
         return result;
     }
 
-    public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
+    public IQueryable<T> GetAll()
     {
-        return await context.Set<T>().ToListAsync(cancellationToken);
+        var t = context.Set<T>();
+        return context.Set<T>().AsQueryable();
     }
 
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
