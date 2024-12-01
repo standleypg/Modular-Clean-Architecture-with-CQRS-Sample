@@ -15,7 +15,13 @@ services:
       POSTGRES_DB: retailportal
     ports:
       - "5432:5432"
-        
+#  Run this manually if want to enable postgres logging to all
+#  docker exec -it retailportal-postgres /bin/bash
+#  echo log_statement = 'all' >> /var/lib/postgresql/data/postgresql.conf
+#  restart docker container
+#  to verify run this command: cat /var/lib/postgresql/data/postgresql.conf | grep log_statement
+  
+  
   emulator:
     container_name: "servicebus-emulator"
     image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
