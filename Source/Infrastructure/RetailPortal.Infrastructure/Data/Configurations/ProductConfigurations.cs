@@ -19,7 +19,7 @@ public class ProductConfigurations: IEntityTypeConfiguration<Product>
 
         builder.Property(p => p.Description)
             .IsRequired()
-            .HasMaxLength(200);
+            .HasMaxLength(1000);
 
         builder.OwnsOne(p=>p.Price, productBuilder =>
         {
