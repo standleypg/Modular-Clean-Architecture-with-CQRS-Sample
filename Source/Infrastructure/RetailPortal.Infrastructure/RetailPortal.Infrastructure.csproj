@@ -31,8 +31,4 @@
   <ItemGroup>
     <Folder Include="Db\Sql\Common\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Db\Sql\Common\Seed\Seed_v0.0.sql" />
-  </ItemGroup>
 </Project>

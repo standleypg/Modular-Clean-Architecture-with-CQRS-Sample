@@ -18,7 +18,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            // Do nothing, this is just a seeding migration
+            // No need to rollback the data seeding
         }
     }
 }
