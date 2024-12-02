@@ -19,20 +19,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Db\Sql\Tables\Role\Role_v0.sql" />
-    <None Remove="Db\Sql\Tables\Category\Category_v0.sql" />
-    <None Remove="Db\Sql\Common\Seed\Seed_v0.sql" />
-    <None Remove="Db\Sql\Common\Seed\Seed_v1.sql" />
+    <None Remove="Db\Sql\Common\Seed\Seed_v0.0.sql" />
+    <None Remove="Db\Sql\Common\Seed\Seed_v0.1.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Db\Sql\Tables\Role\Role_v0.sql" />
-    <EmbeddedResource Include="Db\Sql\Tables\Category\Category_v0.sql" />
-    <EmbeddedResource Include="Db\Sql\Common\Seed\Seed_v0.sql" />
-    <EmbeddedResource Include="Db\Sql\Common\Seed\Seed_v1.sql" />
+    <EmbeddedResource Include="Db\Sql\Common\Seed\Seed_v0.0.sql" />
+    <EmbeddedResource Include="Db\Sql\Common\Seed\Seed_v0.1.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Db\Sql\Common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Db\Sql\Common\Seed\Seed_v0.0.sql" />
   </ItemGroup>
 </Project>

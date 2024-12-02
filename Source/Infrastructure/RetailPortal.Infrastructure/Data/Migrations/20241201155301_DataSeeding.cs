@@ -11,14 +11,14 @@ namespace RetailPortal.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(SqlHelper.GetSqlFromFile("Tables", "Role", "v0"));
-            migrationBuilder.Sql(SqlHelper.GetSqlFromFile("Tables", "Category", "v0"));
+            migrationBuilder.Sql(SqlHelper.GetSqlFromFile("Common", "Seed", "v0.0"));
+            migrationBuilder.Sql(SqlHelper.GetSqlFromFile("Common", "Seed", "v0.1"));
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            // Do nothing since this is an initial data seeding
+            // Do nothing, this is just a seeding migration
         }
     }
 }

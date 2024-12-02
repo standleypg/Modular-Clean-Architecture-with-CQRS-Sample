@@ -12,8 +12,8 @@ using RetailPortal.Infrastructure.Data.Context;
 namespace RetailPortal.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241130093038_SeedingNormal_SellerUser")]
-    partial class SeedingNormal_SellerUser
+    [Migration("20241201155301_DataSeeding")]
+    partial class DataSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Address", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Category", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Product", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,7 +138,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Role", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Seller", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Seller", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -192,7 +192,7 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("Sellers");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.User", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -252,9 +252,9 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Address", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Address", b =>
                 {
-                    b.HasOne("RetailPortal.Core.Entities.User", "User")
+                    b.HasOne("RetailPortal.Domain.Entities.User", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -262,21 +262,21 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Product", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("RetailPortal.Core.Entities.Category", "Category")
+                    b.HasOne("RetailPortal.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RetailPortal.Core.Entities.Seller", "Seller")
+                    b.HasOne("RetailPortal.Domain.Entities.Seller", "Seller")
                         .WithMany("Products")
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("RetailPortal.Core.Entities.Common.ValueObjects.Price", "Price", b1 =>
+                    b.OwnsOne("RetailPortal.Domain.Entities.Common.ValueObjects.Price", "Price", b1 =>
                         {
                             b1.Property<Guid>("ProductId")
                                 .HasColumnType("uuid");
@@ -307,11 +307,11 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Seller", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Seller", b =>
                 {
-                    b.HasOne("RetailPortal.Core.Entities.User", "User")
+                    b.HasOne("RetailPortal.Domain.Entities.User", "User")
                         .WithOne("Seller")
-                        .HasForeignKey("RetailPortal.Core.Entities.Seller", "UserId")
+                        .HasForeignKey("RetailPortal.Domain.Entities.Seller", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
@@ -319,30 +319,30 @@ namespace RetailPortal.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("UserRoles", b =>
                 {
-                    b.HasOne("RetailPortal.Core.Entities.Role", null)
+                    b.HasOne("RetailPortal.Domain.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RetailPortal.Core.Entities.User", null)
+                    b.HasOne("RetailPortal.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Category", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.Seller", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.Seller", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("RetailPortal.Core.Entities.User", b =>
+            modelBuilder.Entity("RetailPortal.Domain.Entities.User", b =>
                 {
                     b.Navigation("Addresses");
 
