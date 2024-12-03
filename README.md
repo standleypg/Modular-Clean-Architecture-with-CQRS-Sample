@@ -2,9 +2,9 @@
 
 ## Disclaimer
 
-**🚨 Template Disclaimer is still in progress**
+**🚨 Template Disclaimer: This sample application is still in progress**
 
-This repository provides a comprehensive template for implementing a Modular Clean Architecture with CQRS. It serves as a starting point and best-practice reference for building scalable, maintainable .NET applications.
+This repository provides a comprehensive template for implementing a Modular Clean Architecture with CQRS and OData integration. It serves as a starting point and best-practice reference for building scalable, maintainable .NET applications with advanced querying capabilities.
 
 ## Getting Started
 
@@ -21,6 +21,9 @@ docker compose -f docker-compose.yml -p docker up -d postgres
 ```
 
 - Run the application
+- For OData request examples, refer to `Documents/Api.http`. For more information, refer to the [OData documentation](https://learn.microsoft.com/en-us/odata/).
+
+````bash
 
 ## Template Structure Overview
 
@@ -43,7 +46,7 @@ Solution/
     ├── CompanyName.ProjectName.Application.Tests/
     ├── CompanyName.ProjectName.Infrastructure.Tests/
     └── CompanyName.ProjectName.API.Tests/
-```
+````
 
 ## Quick Start: Adapting the Template
 

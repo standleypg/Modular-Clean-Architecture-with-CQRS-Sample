@@ -1,0 +1,17 @@
+@baseUrl = https://localhost:7004
+
+### Add User
+POST {{baseUrl}}//api/v0/users
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string"
+}
+
+### Get Products with OData Query Example ($count, $top, $skip, $filter)
+#more about OData: https://learn.microsoft.com/en-us/odata/
+GET {{baseUrl}}/api/v0/products?$count=true&$top=20&$skip=0&$filter=price/value eq 1 and quantity lt 5
+
