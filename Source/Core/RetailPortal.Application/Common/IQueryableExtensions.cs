@@ -1,7 +1,6 @@
 using ErrorOr;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using RetailPortal.Shared.DTOs.Common;
 using System.Globalization;
 using System.Web;
@@ -12,32 +11,40 @@ public static class IQueryableExtensions
 {
     private const int DefaultPageSize = 5;
 
-    public static async Task<ErrorOr<ODataResponse<T>>> GetODataResponseAsync<T>(this IQueryable<T> queryable,  ODataQueryOptions<T>? options)
+    public static async Task<ErrorOr<ODataResponse<T>>> GetODataResponseAsync<T>(this IQueryable<T> queryable,  ODataQueryOptions<T>? options, CancellationToken cancellationToken = default)
     {
+        if(IsInValidOptions(options))
+        {
+            return ErrorOr<ODataResponse<T>>.From([
+                Error.Custom((int)ErrorType.Failure, "General.Failure",
+                    "Select is not supported as it violates application response standards for consistent DTO mapping."
+                )
+            ]);
+        }
+
         // Apply $filter (but not $skip, $top yet)
-        var filteredData = ApplyODataQuery(queryable, options);
+        var data = ApplyODataQuery(queryable, options);
 
         // Get total count based on filtered data (before applying pagination)
         int? count = null;
         if (options.Count.Value)
         {
-            count = filteredData.Count();
+            count = await data.CountAsync(cancellationToken);
         }
-
-        // Apply $skip and $top after filtering
-        var queriedData = options.ApplyTo(filteredData) as IQueryable<T>;
-        var result = await (queriedData ?? new List<T>().AsQueryable()).ToListAsync();
 
         // Determine next page URL if $top and $skip are provided
         string? nextPage = null;
-        if (result.Count > 0)
+        if (count > 0)
         {
-            nextPage = GetNextPageUri(options, filteredData);
+            nextPage = GetNextPageUri(options, data);
         }
+
+        // Apply $skip and $top after filtering
+        data = ApplyPaging(data, options);
 
         return new ODataResponse<T>
         {
-            Value = result,
+            Value = await data.ToListAsync(cancellationToken),
             Count = count,
             NextPage = nextPage
         };
@@ -50,12 +57,37 @@ public static class IQueryableExtensions
             data = options.Filter.ApplyTo(data, new ODataQuerySettings()) as IQueryable<T> ?? data;
         }
 
+        // Use OrderBy carefully as it can cost performance
+        // Why? Because it creates extra SQL query check if the sorting exists
         if (options.OrderBy != null)
         {
-            data = options.OrderBy.ApplyTo(data, new ODataQuerySettings());
+            data = options.OrderBy.ApplyTo(data, new ODataQuerySettings()) as IQueryable<T> ?? data;
         }
 
         return data;
+    }
+
+    private static IQueryable<T> ApplyPaging<T>(
+        IQueryable<T> queryable,
+        ODataQueryOptions<T>? options)
+    {
+
+        if (options?.Skip != null)
+        {
+            queryable = options.Skip.ApplyTo(queryable, new ODataQuerySettings()) ?? queryable;
+        }
+
+        if (options?.Top != null)
+        {
+            queryable = options.Top.ApplyTo(queryable, new ODataQuerySettings()) ?? queryable;
+        }
+
+        return queryable;
+    }
+
+    private static bool IsInValidOptions<T>(ODataQueryOptions<T> options)
+    {
+        return options.SelectExpand != null || options.RawValues.Select != null;
     }
 
     private static string? GetNextPageUri<T>(ODataQueryOptions<T> options, IQueryable<T> data)
@@ -66,8 +98,8 @@ public static class IQueryableExtensions
         if (!data.Skip(skip + top).Any()) return null;
 
         var query = HttpUtility.ParseQueryString(options.Request.QueryString.ToString());
-        query.Set("$skip", (skip + top).ToString());
-        query.Set("$top", top.ToString());
+        query.Set("$skip", string.Format(CultureInfo.InvariantCulture, "{0}", skip + top));
+        query.Set("$top", string.Format(CultureInfo.InvariantCulture, "{0}", top));
 
         var rawNextPage = $"{options.Request.Scheme}://{options.Request.Host}{options.Request.Path}?{query}";
         return new Uri(HttpUtility.UrlDecode(rawNextPage)).AbsoluteUri.ToString(CultureInfo.InvariantCulture);
