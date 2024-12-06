@@ -10,20 +10,19 @@ This repository provides a comprehensive template for implementing a Modular Cle
 
 ### Development Environment Setup
 
-- Install .NET 9 SDK or later
-- Install Docker Desktop
-- Docker Compose is provided for running the database
-
+1. Install .NET 9 SDK or later
+2. Install Docker Desktop
+3. Docker Compose is provided for running the database (this docker orchestration recently replaced by `.NET Aspire`)
+4. Keeping this docker-compose for now (will be removed in future)
+   - In case want to use Docker Compose, just simply run the following command:
 ```bash
 # run the database
 # cd to Docker folder
 docker compose -f docker-compose.yml -p docker up -d postgres
 ```
-
-- Run the application
-- For OData request examples, refer to `Documents/Api.http`. For more information, refer to the [OData documentation](https://learn.microsoft.com/en-us/odata/).
-
-````bash
+5. `.NET Aspire` is a new tool that provides a better way to manage the database and other services. It includes  OpenTelemetry by default for tracing and monitoring.
+   - **Skip** Docker Compose step if you are using `.NET Aspire` to manage application services and database.
+6. For OData request examples, refer to `Documents/Api.http`. For more information, refer to the [OData documentation](https://learn.microsoft.com/en-us/odata/).
 
 ## Template Structure Overview
 
