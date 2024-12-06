@@ -31,4 +31,14 @@ public sealed class Product: EntityBase
     {
         return new Product(name, description, price, quantity, imageUrl);
     }
+
+    public void AddCategory(Guid categoryId)
+    {
+        this.CategoryId = categoryId;
+    }
+
+    public void AddSeller(Guid sellerId)
+    {
+        this.SellerId = sellerId;
+    }
 }

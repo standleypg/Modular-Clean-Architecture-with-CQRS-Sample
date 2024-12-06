@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RetailPortal.Application.Common;
 
-public static class IQueryableExtensions
+public static class QueryableExtensions
 {
     private const int DefaultPageSize = 5;
 
