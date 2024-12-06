@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.OData;
 using RetailPortal.Api;
 using RetailPortal.Application;
+using RetailPortal.Aspire.ServiceDefaults;
 using RetailPortal.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 var configuration = builder.Configuration;
 
@@ -17,6 +20,8 @@ builder.Services
     .AddInfrastructure(configuration);
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.AddApi();
 

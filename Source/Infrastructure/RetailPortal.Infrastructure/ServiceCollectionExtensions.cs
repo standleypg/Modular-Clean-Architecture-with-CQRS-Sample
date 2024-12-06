@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString(Appsettings.ConnectionString));
+            options.UseNpgsql(configuration.GetConnectionString("retailportal-db"));
         });
 
         return services;

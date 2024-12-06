@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-RetailPortal.MigrationService-b3ca7d6e-602b-4642-9e99-8221238b5f58</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Aspire\RetailPortal.Aspire.ServiceDefaults\RetailPortal.Aspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Source\Infrastructure\RetailPortal.Infrastructure\RetailPortal.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
