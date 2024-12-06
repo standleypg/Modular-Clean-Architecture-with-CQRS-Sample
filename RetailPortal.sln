@@ -31,15 +31,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Shared", "Sour
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C9B921C-86C0-4AFB-B843-0E4EDA6885AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Unit", "Source\Tests\RetailPortal.Unit\RetailPortal.Unit.csproj", "{4507EE70-C0CD-48DD-8BE5-2D2C87E81413}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Application.UnitTests", "Source\Tests\RetailPortal.Application.UnitTests\RetailPortal.Application.UnitTests.csproj", "{4507EE70-C0CD-48DD-8BE5-2D2C87E81413}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{E83FDEDC-E908-46F5-9D67-0E10F55B5E10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.MigrationService", "Workers\RetailPortal.MigrationService\RetailPortal.MigrationService.csproj", "{FC51316D-AFEC-4234-91FA-6894A3807A54}"
 EndProject
-Project("{54a90642-561a-4bb1-a94e-469adee60c69}") = "RetailPortal.app", "Source\Presentation\App\RetailPortal.app.esproj", "{D7308560-084D-47A3-8240-4C35AEEAF828}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "RetailPortal.app", "Source\Presentation\App\RetailPortal.app.esproj", "{D7308560-084D-47A3-8240-4C35AEEAF828}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{01939990-33c4-74a6-ace3-971e0239c05f}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{01939990-33C4-74A6-ACE3-971E0239C05F}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "Docker.docker-compose", "Docker\docker-compose.dcproj", "{9CB4280B-C088-4110-94DC-604FB0A0C279}"
 EndProject
@@ -93,9 +93,9 @@ Global
 		{D7308560-084D-47A3-8240-4C35AEEAF828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7308560-084D-47A3-8240-4C35AEEAF828}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CB4280B-C088-4110-94DC-604FB0A0C279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {9CB4280B-C088-4110-94DC-604FB0A0C279}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.Build.0 = Release|Any CPU
+								{9CB4280B-C088-4110-94DC-604FB0A0C279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+								{9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+								{9CB4280B-C088-4110-94DC-604FB0A0C279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EA4EF9F5-7E89-4A54-BCF1-EFFD4CB483CE} = {A4C8ACBB-EDD6-46E1-964D-77A3C62AE994}
