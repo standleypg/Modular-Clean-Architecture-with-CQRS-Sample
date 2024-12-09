@@ -32,6 +32,34 @@ public sealed class Product: EntityBase
         return new Product(name, description, price, quantity, imageUrl);
     }
 
+    public void Update(string? name = null, string? description = null, Price? price = null, int? quantity = null, string? imageUrl = null)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            this.Name = name;
+        }
+
+        if (!string.IsNullOrWhiteSpace(description))
+        {
+            this.Description = description;
+        }
+
+        if (price is not null)
+        {
+            this.Price = price;
+        }
+
+        if (quantity is not null)
+        {
+            this.Quantity = quantity.Value;
+        }
+
+        if (!string.IsNullOrWhiteSpace(imageUrl))
+        {
+            this.ImageUrl = imageUrl;
+        }
+    }
+
     public void AddCategory(Guid categoryId)
     {
         this.CategoryId = categoryId;
