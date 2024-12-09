@@ -43,7 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{019399
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "Docker.docker-compose", "Docker\docker-compose.dcproj", "{9CB4280B-C088-4110-94DC-604FB0A0C279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Infrastructure.UnitTests", "RetailPortal.Infrastructure.UnitTests\RetailPortal.Infrastructure.UnitTests.csproj", "{114E77DE-0C2A-45CD-992C-DAE06D1B56A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPortal.Infrastructure.UnitTests", "Source\Tests\RetailPortal.Infrastructure.UnitTests\RetailPortal.Infrastructure.UnitTests.csproj", "{114E77DE-0C2A-45CD-992C-DAE06D1B56A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

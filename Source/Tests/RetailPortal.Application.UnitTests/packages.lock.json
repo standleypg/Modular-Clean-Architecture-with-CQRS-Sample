@@ -425,7 +425,6 @@
           "Moq": "[4.20.72, )",
           "RetailPortal.Domain": "[1.0.0, )",
           "RetailPortal.Infrastructure": "[1.0.0, )",
-          "RetailPortal.Shared": "[1.0.0, )",
           "coverlet.collector": "[6.0.2, )",
           "xunit": "[2.9.2, )",
           "xunit.runner.visualstudio": "[2.8.2, )"
