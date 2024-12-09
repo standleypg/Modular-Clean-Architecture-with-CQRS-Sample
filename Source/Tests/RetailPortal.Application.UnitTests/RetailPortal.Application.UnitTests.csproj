@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\RetailPortal.Infrastructure.UnitTests\RetailPortal.Infrastructure.UnitTests.csproj" />
     <ProjectReference Include="..\..\Core\RetailPortal.Application\RetailPortal.Application.csproj" />
     <ProjectReference Include="..\..\Core\RetailPortal.Domain\RetailPortal.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\RetailPortal.Infrastructure\RetailPortal.Infrastructure.csproj" />

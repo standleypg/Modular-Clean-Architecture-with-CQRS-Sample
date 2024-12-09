@@ -7,8 +7,8 @@ public interface IUnitOfWork : IDisposable
     IUserRepository UserRepository { get; }
     IProductRepository ProductRepository { get; }
     IRoleRepository RoleRepository { get; }
-    Task<int> SaveChangesAsync();
-    Task BeginTransactionAsync();
-    Task CommitAsync();
-    Task RollbackAsync();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+    Task CommitAsync(CancellationToken cancellationToken = default);
+    Task RollbackAsync(CancellationToken cancellationToken = default);
 }

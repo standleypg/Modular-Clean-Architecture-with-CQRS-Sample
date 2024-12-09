@@ -8,7 +8,7 @@ namespace RetailPortal.Infrastructure.Data.Repositories;
 public class GenericRepository<T>(ApplicationDbContext context) : IGenericRepository<T>
     where T : class
 {
-    public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var result = await context.Set<T>().FindAsync([id], cancellationToken);
 
@@ -22,7 +22,6 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
 
     public IQueryable<T> GetAll()
     {
-        var t = context.Set<T>();
         return context.Set<T>().AsQueryable();
     }
 
