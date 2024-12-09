@@ -1,18 +1,9 @@
-using ErrorOr;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OData.Edm;
-using Microsoft.OData.ModelBuilder;
-using Microsoft.OData.UriParser;
 using Moq;
 using RetailPortal.Application.Products.Queries.GetAllProduct;
 using RetailPortal.Domain.Entities;
-using RetailPortal.Domain.Entities.Common.ValueObjects;
 using RetailPortal.Domain.Interfaces.Repositories;
 using RetailPortal.Domain.Interfaces.UnitOfWork;
-using RetailPortal.Infrastructure.Data.Context;
-using RetailPortal.Infrastructure.UnitTests.Data.Repositories;
+using RetailPortal.Infrastructure.UnitTests.Data.Repositories.Common;
 
 namespace RetailPortal.Unit.Products.Queries.GetAllProduct;
 
@@ -38,7 +29,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateMockProducts(productCount);
+        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
@@ -57,7 +48,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 0;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateMockProducts(productCount);
+        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
@@ -76,7 +67,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount, includeSelectQuery: true);
-        var products = await this._repositoryUtils.CreateMockProducts(productCount);
+        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);

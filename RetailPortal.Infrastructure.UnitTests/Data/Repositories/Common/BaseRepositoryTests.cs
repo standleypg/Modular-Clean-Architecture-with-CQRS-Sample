@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RetailPortal.Infrastructure.Data.Context;
 
-namespace RetailPortal.Infrastructure.UnitTests.Data.Repositories;
+namespace RetailPortal.Infrastructure.UnitTests.Data.Repositories.Common;
 
 public class BaseRepositoryTests: IDisposable
 {
