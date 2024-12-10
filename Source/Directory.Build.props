@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreLockedMode>
+        <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
 </Project>

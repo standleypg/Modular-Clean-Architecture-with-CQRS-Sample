@@ -3,6 +3,7 @@ using RetailPortal.Domain.Interfaces.Repositories;
 using RetailPortal.Domain.Interfaces.UnitOfWork;
 using RetailPortal.Infrastructure.Data.Context;
 using RetailPortal.Infrastructure.Data.Repositories;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RetailPortal.Infrastructure.Data.UnitOfWork;
 
@@ -10,12 +11,15 @@ public sealed class UnitOfWork(ApplicationDbContext context)
     : IUnitOfWork, IAsyncDisposable
 {
     private IDbContextTransaction? _currentTransaction;
-    private IUserRepository _userRepository;
-    public IUserRepository UserRepository => this._userRepository ??= new UserRepository(context);
-    private IProductRepository _productRepository;
-    public IProductRepository ProductRepository => this._productRepository ??= new ProductRepository(context);
-    private IRoleRepository _roleRepository;
-    public IRoleRepository RoleRepository => this._roleRepository ??= new RoleRepository(context);
+
+    [field: AllowNull, MaybeNull]
+    public IUserRepository UserRepository => field ??= new UserRepository(context);
+    [field: AllowNull, MaybeNull]
+    public IProductRepository ProductRepository => field ??= new ProductRepository(context);
+    [field: AllowNull, MaybeNull]
+    public IRoleRepository RoleRepository => field ??= new RoleRepository(context);
+    [field: AllowNull, MaybeNull]
+    public ICategoryRepository CategoryRepository => field ??= new CategoryRepository(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

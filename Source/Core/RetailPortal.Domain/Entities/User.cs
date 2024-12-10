@@ -45,6 +45,28 @@ public sealed class User : EntityBase
     {
         this.Seller = seller;
         return this;
+    }
 
+    public void Update(string? firstName = null, string? lastName = null, string? email = null, string? password = null)
+    {
+        if (!string.IsNullOrWhiteSpace(firstName))
+        {
+            this.FirstName = firstName;
+        }
+
+        if (!string.IsNullOrWhiteSpace(lastName))
+        {
+            this.LastName = lastName;
+        }
+
+        if (!string.IsNullOrWhiteSpace(email))
+        {
+            this.Email = email;
+        }
+
+        if (!string.IsNullOrWhiteSpace(password))
+        {
+            this.Password = password;
+        }
     }
 }
