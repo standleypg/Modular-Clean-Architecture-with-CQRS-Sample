@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RetailPortal.Application.Common;
 using RetailPortal.Domain.Entities;
-using RetailPortal.Domain.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Shared.DTOs.Common;
 
 namespace RetailPortal.Application.Products.Queries.GetAllProduct;

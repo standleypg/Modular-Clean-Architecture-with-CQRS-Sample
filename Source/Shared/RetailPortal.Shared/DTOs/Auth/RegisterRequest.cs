@@ -1,6 +1,7 @@
-﻿namespace RetailPortal.Shared.DTOs.User;
+namespace RetailPortal.Shared.DTOs.Auth;
 
-public record CreateUserRequest(
+public record RegisterRequest
+(
     string FirstName,
     string LastName,
     string Email,

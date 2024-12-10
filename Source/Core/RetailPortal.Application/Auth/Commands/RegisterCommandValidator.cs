@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace RetailPortal.Application.Users.Commands.CreateUser;
+namespace RetailPortal.Application.Auth.Commands;
 
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class RegisterCommandValidator:AbstractValidator<RegisterCommand>
 {
-    public CreateUserCommandValidator()
+    public RegisterCommandValidator()
     {
         this.RuleFor(x => x.FirstName)
             .NotEmpty()

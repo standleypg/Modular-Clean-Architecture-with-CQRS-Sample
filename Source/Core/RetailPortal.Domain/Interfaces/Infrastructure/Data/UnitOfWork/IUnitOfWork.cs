@@ -1,6 +1,6 @@
-﻿using RetailPortal.Domain.Interfaces.Repositories;
+﻿using RetailPortal.Domain.Interfaces.Infrastructure.Data.Repositories;
 
-namespace RetailPortal.Domain.Interfaces.UnitOfWork;
+namespace RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 
 public interface IUnitOfWork : IDisposable
 {

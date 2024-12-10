@@ -25,9 +25,18 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(50);
 
-        builder.Property(u => u.Password)
-            .IsRequired()
-            .HasMaxLength(50);
+        builder.OwnsOne(u=>u.Password, passwordBuilder =>
+        {
+            passwordBuilder.Property(p => p.PasswordHash)
+                .HasColumnName("PasswordHash")
+                .IsRequired();
+
+            passwordBuilder.Property(p => p.PasswordSalt)
+                .HasColumnName("PasswordSalt")
+                .IsRequired();
+
+            passwordBuilder.ToTable("Users");
+        });
 
         builder.HasMany(u=>u.Addresses)
             .WithOne(a=>a.User)
