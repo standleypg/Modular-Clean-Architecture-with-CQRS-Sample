@@ -8,6 +8,10 @@
     <PackageReference Include="ErrorOr" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Infrastructure\Data\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <RootNamespace>RetailPortal.Domain</RootNamespace>
   </PropertyGroup>

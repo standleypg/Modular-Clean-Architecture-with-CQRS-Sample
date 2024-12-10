@@ -12,8 +12,8 @@ using RetailPortal.Infrastructure.Data.Context;
 namespace RetailPortal.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241202113642_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241210102409_InitialMigrations")]
+    partial class InitialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,11 +216,6 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
                     b.Property<Guid?>("SellerId")
                         .HasColumnType("uuid");
 
@@ -315,6 +310,35 @@ namespace RetailPortal.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RetailPortal.Domain.Entities.User", b =>
+                {
+                    b.OwnsOne("RetailPortal.Domain.Entities.Common.ValueObjects.Password", "Password", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<byte[]>("PasswordHash")
+                                .IsRequired()
+                                .HasColumnType("bytea")
+                                .HasColumnName("PasswordHash");
+
+                            b1.Property<byte[]>("PasswordSalt")
+                                .IsRequired()
+                                .HasColumnType("bytea")
+                                .HasColumnName("PasswordSalt");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Password")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("UserRoles", b =>

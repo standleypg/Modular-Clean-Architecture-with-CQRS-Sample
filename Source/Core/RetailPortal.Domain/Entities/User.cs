@@ -1,4 +1,5 @@
 using RetailPortal.Domain.Entities.Common.Base;
+using RetailPortal.Domain.Entities.Common.ValueObjects;
 using System.Text.Json.Serialization;
 
 namespace RetailPortal.Domain.Entities;
@@ -8,14 +9,17 @@ public sealed class User : EntityBase
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string Email { get; private set; }
-    public string Password { get; private set; }
+    public Password Password { get; private set; }
     public Guid? SellerId { get; private set; }
     public Seller? Seller { get; private set; }
 
     [JsonIgnore] public ICollection<Address> Addresses { get; private set; }
     [JsonIgnore] public ICollection<Role> Roles { get; private set; }
 
-    private User(string firstName, string lastName, string email, string password)
+    // Whenever there is ValueObject, parameterless private constructor is required
+    private User() { }
+
+    private User(string firstName, string lastName, string email, Password password)
     {
         this.FirstName = firstName;
         this.LastName = lastName;
@@ -25,7 +29,7 @@ public sealed class User : EntityBase
         this.Roles = new List<Role>();
     }
 
-    public static User Create(string firstName, string lastName, string email, string password)
+    public static User Create(string firstName, string lastName, string email, Password password)
     {
         return new User(firstName, lastName, email, password);
     }
@@ -47,7 +51,7 @@ public sealed class User : EntityBase
         return this;
     }
 
-    public void Update(string? firstName = null, string? lastName = null, string? email = null, string? password = null)
+    public void Update(string? firstName = null, string? lastName = null, string? email = null, Password? password = null)
     {
         if (!string.IsNullOrWhiteSpace(firstName))
         {
@@ -64,7 +68,7 @@ public sealed class User : EntityBase
             this.Email = email;
         }
 
-        if (!string.IsNullOrWhiteSpace(password))
+        if (password != null)
         {
             this.Password = password;
         }

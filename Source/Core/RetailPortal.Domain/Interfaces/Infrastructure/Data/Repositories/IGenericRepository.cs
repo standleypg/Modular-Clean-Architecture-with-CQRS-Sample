@@ -1,4 +1,4 @@
-﻿namespace RetailPortal.Domain.Interfaces.Repositories;
+﻿namespace RetailPortal.Domain.Interfaces.Infrastructure.Data.Repositories;
 
 public interface IGenericRepository<T> where T : class
 {

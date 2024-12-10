@@ -4,7 +4,7 @@ using MediatR;
 using RetailPortal.Application.Common;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
-using RetailPortal.Domain.Interfaces.UnitOfWork;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 
 namespace RetailPortal.Application.Products.Commands.CreateProduct;
 

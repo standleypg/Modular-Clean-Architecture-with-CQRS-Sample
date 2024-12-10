@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RetailPortal.Domain.Entities;
+using RetailPortal.Domain.Entities.Common.ValueObjects;
 using RetailPortal.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Infrastructure.UnitTests.Data.Repositories.Common;
 
@@ -74,7 +75,8 @@ public class UserRepositoryTests: BaseRepositoryTests
     {
         // Arrange
         var user = (await this.CreateUser())[0];
-        user.Update("Updated Name", "Updated Lastname", "updated@email.com", "Updated Password");
+        var password = Password.Create([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]);
+        user.Update("Updated Name", "Updated Lastname", "updated@email.com", password);
 
         // Act
         await this._uow.UserRepository.Update(user);

@@ -1,12 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RetailPortal.Domain.Interfaces.Repositories;
-using RetailPortal.Domain.Interfaces.UnitOfWork;
+using Microsoft.Extensions.Options;
+using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.Repositories;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
+using RetailPortal.Domain.Interfaces.Infrastructure.Services;
+using RetailPortal.Infrastructure.Auth;
 using RetailPortal.Infrastructure.Data.Context;
 using RetailPortal.Infrastructure.Data.Repositories;
 using RetailPortal.Infrastructure.Data.UnitOfWork;
-using RetailPortal.Shared.Constants;
+using RetailPortal.Infrastructure.Services;
 
 namespace RetailPortal.Infrastructure;
 
@@ -14,9 +18,20 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        var jwtSettings = new JwtSettings();
+        configuration.Bind(JwtSettings.SectionName, jwtSettings);
+
         services.AddDbContext(configuration);
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        services
+            .AddSingleton(Options.Create(jwtSettings))
+            .AddSingleton<IDateTimeProvider, DateTimeProvider>()
+            .AddSingleton<IPasswordHasher, PasswordHasher>()
+            .AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        services
+            .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+            .AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
