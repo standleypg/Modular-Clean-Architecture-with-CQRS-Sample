@@ -18,7 +18,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     public async Task GetByIdAsync_ShouldReturnProduct()
     {
         // Arrange
-        var product = (await CreateProduct())[0];
+        var product = (await this.CreateProduct())[0];
 
         // Act
         var result = await this._uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None);
@@ -46,7 +46,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     public async Task GetAllProducts_ShouldReturnAllProducts()
     {
         // Arrange
-        var products = await CreateProduct(10);
+        var products = await this.CreateProduct(10);
 
         // Act
         var result = await this._uow.ProductRepository.GetAll().ToListAsync();
@@ -60,7 +60,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     public async Task AddAsync_ShouldAddProduct()
     {
         // Arrange
-        var product = (await CreateProduct())[0];
+        var product = (await this.CreateProduct())[0];
 
         // Act
         var result = await this._uow.ProductRepository.AddAsync(product, CancellationToken.None);
@@ -73,7 +73,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     public async Task Update_ShouldUpdateProduct()
     {
         // Arrange
-        var product = (await CreateProduct())[0];
+        var product = (await this.CreateProduct())[0];
         product.Update("Updated Name", "Updated Description");
 
         // Act
@@ -89,7 +89,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     public async Task Delete_ShouldDeleteProduct()
     {
         // Arrange
-        var product = (await CreateProduct())[0];
+        var product = (await this.CreateProduct())[0];
 
         // Act
         await this._uow.ProductRepository.Delete(product);
@@ -106,7 +106,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
     private async Task<List<Product>> CreateProduct(int count = 1)
     {
         var products = new List<Product>();
-        await RepositoryUtils.CreateProduct(async (product, token) =>
+        await RepositoryUtils.CreateEntity(RepositoryUtils.CreateProduct, async (product, token) =>
         {
             products.Add(product);
             await this._uow.ProductRepository.AddAsync(product, token);
