@@ -43,17 +43,17 @@ public class UserRepositoryTests: BaseRepositoryTests
     }
 
     [Fact]
-    public async Task GetAllCategories_ShouldReturnAllCategories()
+    public async Task GetAllUsers_ShouldReturnAllUsers()
     {
         // Arrange
-        var categories = await this.CreateUser(10);
+        var users = await this.CreateUser(10);
 
         // Act
         var result = await this._uow.UserRepository.GetAll().ToListAsync();
 
         // Assert
-        Assert.Equal(categories, result);
-        Assert.Equal(categories.Count, result.Count);
+        Assert.Equal(users, result);
+        Assert.Equal(users.Count, result.Count);
     }
 
     [Fact]
@@ -105,15 +105,15 @@ public class UserRepositoryTests: BaseRepositoryTests
 
     private async Task<List<User>> CreateUser(int count = 1)
     {
-        var categories = new List<User>();
+        var users = new List<User>();
         await RepositoryUtils.CreateEntity(RepositoryUtils.CreateUser,async (user, token) =>
         {
-            categories.Add(user);
+            users.Add(user);
             await this._uow.UserRepository.AddAsync(user, token);
             await this._uow.SaveChangesAsync(token);
         }, count);
 
-        return categories;
+        return users;
     }
 
     #endregion
