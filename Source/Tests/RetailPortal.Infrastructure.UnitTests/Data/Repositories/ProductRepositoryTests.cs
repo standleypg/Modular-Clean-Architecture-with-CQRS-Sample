@@ -11,7 +11,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
 
     public ProductRepositoryTests()
     {
-        _uow = new UnitOfWork(Context);
+        this._uow = new UnitOfWork(this.Context);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
         var product = (await CreateProduct())[0];
 
         // Act
-        var result = await _uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None);
+        var result = await this._uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None);
 
         // Assert
         Assert.Equal(product, result);
@@ -35,7 +35,7 @@ public class ProductRepositoryTests : BaseRepositoryTests
 
         // Act
         var exception = await Assert.ThrowsAsync<KeyNotFoundException>(() =>
-            _uow.ProductRepository.GetByIdAsync(guid, CancellationToken.None));
+            this._uow.ProductRepository.GetByIdAsync(guid, CancellationToken.None));
 
         // Assert
         Assert.Equal($"Entity of type {nameof(Product)} with id {guid} not found.", exception.Message);
@@ -49,13 +49,13 @@ public class ProductRepositoryTests : BaseRepositoryTests
         var products = await CreateProduct(10);
 
         // Act
-        var result = await _uow.ProductRepository.GetAll().ToListAsync();
+        var result = await this._uow.ProductRepository.GetAll().ToListAsync();
 
         // Assert
         Assert.Equal(products, result);
         Assert.Equal(products.Count, result.Count);
     }
-    
+
     [Fact]
     public async Task AddAsync_ShouldAddProduct()
     {
@@ -63,39 +63,39 @@ public class ProductRepositoryTests : BaseRepositoryTests
         var product = (await CreateProduct())[0];
 
         // Act
-        var result = await _uow.ProductRepository.AddAsync(product, CancellationToken.None);
+        var result = await this._uow.ProductRepository.AddAsync(product, CancellationToken.None);
 
         // Assert
         Assert.Equal(product, result);
     }
-    
+
     [Fact]
     public async Task Update_ShouldUpdateProduct()
     {
         // Arrange
         var product = (await CreateProduct())[0];
         product.Update("Updated Name", "Updated Description");
-        
+
         // Act
-        await _uow.ProductRepository.Update(product);
-        await _uow.SaveChangesAsync(CancellationToken.None);
-        var result = await _uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None);
+        await this._uow.ProductRepository.Update(product);
+        await this._uow.SaveChangesAsync(CancellationToken.None);
+        var result = await this._uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None);
 
         // Assert
         Assert.Equal(product, result);
     }
-    
+
     [Fact]
     public async Task Delete_ShouldDeleteProduct()
     {
         // Arrange
         var product = (await CreateProduct())[0];
-        
+
         // Act
-        await _uow.ProductRepository.Delete(product);
-        await _uow.SaveChangesAsync(CancellationToken.None);
+        await this._uow.ProductRepository.Delete(product);
+        await this._uow.SaveChangesAsync(CancellationToken.None);
         var result = await Assert.ThrowsAsync<KeyNotFoundException>(() =>
-            _uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None));
+            this._uow.ProductRepository.GetByIdAsync(product.Id, CancellationToken.None));
 
         // Assert
         Assert.IsType<KeyNotFoundException>(result);
@@ -109,8 +109,8 @@ public class ProductRepositoryTests : BaseRepositoryTests
         await RepositoryUtils.CreateProduct(async (product, token) =>
         {
             products.Add(product);
-            await _uow.ProductRepository.AddAsync(product, token);
-            await _uow.SaveChangesAsync(token);
+            await this._uow.ProductRepository.AddAsync(product, token);
+            await this._uow.SaveChangesAsync(token);
         }, count);
 
         return products;
