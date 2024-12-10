@@ -19,4 +19,9 @@ public sealed class Category: EntityBase
     {
         return new Category(name);
     }
+
+    public void Update(string name)
+    {
+        this.Name = name;
+    }
 }
