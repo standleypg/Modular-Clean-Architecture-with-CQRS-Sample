@@ -43,17 +43,17 @@ public class RoleRepositoryTests: BaseRepositoryTests
     }
 
     [Fact]
-    public async Task GetAllCategories_ShouldReturnAllCategories()
+    public async Task GetAllRoles_ShouldReturnAllRoles()
     {
         // Arrange
-        var categories = await this.CreateRole(10);
+        var roles = await this.CreateRole(10);
 
         // Act
         var result = await this._uow.RoleRepository.GetAll().ToListAsync();
 
         // Assert
-        Assert.Equal(categories, result);
-        Assert.Equal(categories.Count, result.Count);
+        Assert.Equal(roles, result);
+        Assert.Equal(roles.Count, result.Count);
     }
 
     [Fact]
@@ -89,15 +89,15 @@ public class RoleRepositoryTests: BaseRepositoryTests
 
     private async Task<List<Role>> CreateRole(int count = 1)
     {
-        var categories = new List<Role>();
+        var roles = new List<Role>();
         await RepositoryUtils.CreateEntity(RepositoryUtils.CreateRole,async (role, token) =>
         {
-            categories.Add(role);
+            roles.Add(role);
             await this._uow.RoleRepository.AddAsync(role, token);
             await this._uow.SaveChangesAsync(token);
         }, count);
 
-        return categories;
+        return roles;
     }
 
     #endregion
