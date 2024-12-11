@@ -1,16 +1,13 @@
 using ErrorOr;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using RetailPortal.Api.Common;
 using RetailPortal.Api.Common.Http;
-using RetailPortal.Shared.DTOs.Common;
-using System.Globalization;
-using System.Web;
 
 namespace RetailPortal.Api.Controllers.Common;
 
+[Authorize]
 public class ODataBaseController: ODataController
 {
     protected ActionResult Problem(List<Error> errors)
