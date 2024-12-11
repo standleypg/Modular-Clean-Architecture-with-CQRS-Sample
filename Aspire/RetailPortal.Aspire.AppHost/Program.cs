@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Hosting;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("retailportal-db")
@@ -7,7 +5,9 @@ var postgres = builder.AddPostgres("retailportal-db")
     .WithPgAdmin();
 
 builder.AddProject<Projects.RetailPortal_Api>("retailportal-api")
-    .WithReference(postgres);
+    .WithHttpsEndpoint(port: 7005, name: "api")
+    .WithReference(postgres)
+    .WaitFor(postgres);
 
 builder.AddProject<Projects.RetailPortal_MigrationService>("retailportal-migration-service")
     .WithReference(postgres);
