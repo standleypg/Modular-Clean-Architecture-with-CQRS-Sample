@@ -26,12 +26,12 @@ public sealed class Appsettings
     public class AzureAdSettings
     {
         public const string SectionName = "AzureAd";
+        public const string JwtBearerScheme = "Azure";
         public string Instance { get; set; } = null!;
         public string TenantId { get; set; } = null!;
         public string ClientId { get; set; } = null!;
         public string Scopes { get; set; } = null!;
         public string ClientSecret { get; set; } = null!;
-        public string JwtBearerScheme { get; set; } = null!;
     }
 
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Auth.Commands;
 using RetailPortal.Application.Auth.Queries;
+using RetailPortal.Shared.Constants;
 using RetailPortal.Shared.DTOs.Auth;
 
 namespace RetailPortal.Api.Controllers;
@@ -43,7 +44,7 @@ public class AuthController(ISender mediator, IMapper mapper) : ODataBaseControl
 
     [HttpGet("token-exchange")]
     [Authorize(AuthenticationSchemes = GoogleDefaults.AuthenticationScheme)]
-    [Authorize(AuthenticationSchemes = "Azure")]
+    [Authorize(AuthenticationSchemes = Appsettings.AzureAdSettings.JwtBearerScheme)]
     public async Task<IActionResult> TokenExchange()
     {
         await Task.CompletedTask;
