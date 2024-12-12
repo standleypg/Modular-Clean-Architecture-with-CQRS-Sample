@@ -3,16 +3,17 @@ using Microsoft.IdentityModel.Tokens;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
 using RetailPortal.Domain.Interfaces.Infrastructure.Services;
+using RetailPortal.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace RetailPortal.Infrastructure.Auth;
 
-public sealed class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtOptions)
+public sealed class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<Appsettings.JwtSettings> jwtOptions)
     : IJwtTokenGenerator
 {
-    private readonly JwtSettings _jwtSettings = jwtOptions.Value;
+    private readonly Appsettings.JwtSettings _jwtSettings = jwtOptions.Value;
 
     public string GenerateToken(User user)
     {

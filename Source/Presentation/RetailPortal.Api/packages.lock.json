@@ -50,24 +50,6 @@
           "System.Text.Json": "9.0.0"
         }
       },
-      "Microsoft.Identity.Web": {
-        "type": "Direct",
-        "requested": "[3.5.0, )",
-        "resolved": "3.5.0",
-        "contentHash": "LyhpNMbPwAFge03wtVgKLAFJZ6hf9olh6RvpKiLsMG95kaRkrOF/dH+kBKLrXFHf7k/ZuWwnsA1i/uykqviXaA==",
-        "dependencies": {
-          "Microsoft.Extensions.Http": "3.1.3",
-          "Microsoft.Identity.Web.Certificate": "3.5.0",
-          "Microsoft.Identity.Web.Certificateless": "3.5.0",
-          "Microsoft.Identity.Web.TokenAcquisition": "3.5.0",
-          "Microsoft.Identity.Web.TokenCache": "3.5.0",
-          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "8.3.0",
-          "Microsoft.IdentityModel.Validators": "8.3.0",
-          "System.Formats.Asn1": "9.0.0",
-          "System.IdentityModel.Tokens.Jwt": "8.3.0",
-          "System.Text.Json": "9.0.0"
-        }
-      },
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
         "type": "Direct",
         "requested": "[1.21.0, )",
@@ -705,6 +687,11 @@
         "resolved": "2.0.1",
         "contentHash": "FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ=="
       },
+      "Microsoft.AspNetCore.Authentication.Google": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "aO8Yeg1BaWGdWuLOZXAOxq9zYTSXObsYs75SlayR5ntPVQGyVXzvvn2NhrDdyonmz/z7Q86qZhdr42Cq1gMcNA=="
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer": {
         "type": "Transitive",
         "resolved": "9.0.0",
@@ -1301,6 +1288,23 @@
         "dependencies": {
           "Microsoft.Identity.Client": "4.61.3",
           "System.Security.Cryptography.ProtectedData": "4.5.0"
+        }
+      },
+      "Microsoft.Identity.Web": {
+        "type": "Transitive",
+        "resolved": "3.5.0",
+        "contentHash": "LyhpNMbPwAFge03wtVgKLAFJZ6hf9olh6RvpKiLsMG95kaRkrOF/dH+kBKLrXFHf7k/ZuWwnsA1i/uykqviXaA==",
+        "dependencies": {
+          "Microsoft.Extensions.Http": "3.1.3",
+          "Microsoft.Identity.Web.Certificate": "3.5.0",
+          "Microsoft.Identity.Web.Certificateless": "3.5.0",
+          "Microsoft.Identity.Web.TokenAcquisition": "3.5.0",
+          "Microsoft.Identity.Web.TokenCache": "3.5.0",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "8.3.0",
+          "Microsoft.IdentityModel.Validators": "8.3.0",
+          "System.Formats.Asn1": "9.0.0",
+          "System.IdentityModel.Tokens.Jwt": "8.3.0",
+          "System.Text.Json": "9.0.0"
         }
       },
       "Microsoft.Identity.Web.Certificate": {
@@ -2103,7 +2107,9 @@
       "retailportal.infrastructure": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Google": "[9.0.0, )",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "[9.0.0, )",
+          "Microsoft.Identity.Web": "[3.5.0, )",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "[9.0.1, )",
           "RetailPortal.Application": "[1.0.0, )",
           "RetailPortal.Shared": "[1.0.0, )",
