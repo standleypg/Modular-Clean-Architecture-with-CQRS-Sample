@@ -56,7 +56,6 @@ public static class ServiceCollectionExtensions
     {
         var jwtOptions = services.BuildServiceProvider().GetRequiredService<IOptions<Appsettings.JwtSettings>>().Value;
         var googleOptions = services.BuildServiceProvider().GetRequiredService<IOptions<Appsettings.GoogleSettings>>().Value;
-        var azureAdOptions = services.BuildServiceProvider().GetRequiredService<IOptions<Appsettings.AzureAdSettings>>().Value;
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -94,20 +93,17 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddConfigurationBinding(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = new Appsettings.JwtSettings();
-        configuration.Bind(Appsettings.JwtSettings.SectionName, jwtSettings);
-
-        var googleSettings = new Appsettings.GoogleSettings();
-        configuration.Bind(Appsettings.GoogleSettings.SectionName, googleSettings);
-
-        var azureAdSettings = new Appsettings.AzureAdSettings();
-        configuration.Bind(Appsettings.AzureAdSettings.SectionName, azureAdSettings);
-
-        services
-            .AddSingleton(Options.Create(jwtSettings))
-            .AddSingleton(Options.Create(googleSettings))
-            .AddSingleton(Options.Create(azureAdSettings));
+        BindAndAdd<Appsettings.JwtSettings>(Appsettings.JwtSettings.SectionName);
+        BindAndAdd<Appsettings.GoogleSettings>(Appsettings.GoogleSettings.SectionName);
+        BindAndAdd<Appsettings.AzureAdSettings>(Appsettings.AzureAdSettings.SectionName);
 
         return services;
+
+        void BindAndAdd<TSettings>(string sectionName) where TSettings : class, new()
+        {
+            var settings = new TSettings();
+            configuration.Bind(sectionName, settings);
+            services.AddSingleton(Options.Create(settings));
+        }
     }
 }
