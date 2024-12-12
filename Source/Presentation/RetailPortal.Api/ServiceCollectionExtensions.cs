@@ -1,12 +1,13 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RetailPortal.Infrastructure.Auth;
 using System.Reflection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace RetailPortal.Api;
 
@@ -15,7 +16,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddAuth(configuration)
             .AddOpenApi()
             .AddAutoMapper();
         return services;
@@ -52,16 +52,6 @@ public static class ServiceCollectionExtensions
             options.GroupNameFormat = "'v'V";
             options.SubstituteApiVersionInUrl = true;
         });
-
-        return services;
-    }
-
-    private static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
-
-        services.AddAuthorization();
 
         return services;
     }
