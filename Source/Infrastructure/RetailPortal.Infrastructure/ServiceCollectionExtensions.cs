@@ -80,19 +80,19 @@ public static class ServiceCollectionExtensions
                 {
                     ValidateIssuer = true,
                     ValidIssuer = googleOptions.Authority,
-                    ValidateAudience = false,
+                    ValidateAudience = true,
                     ValidAudience = googleOptions.ClientId,
                     ValidateLifetime = true,
                 };
             })
-            .AddMicrosoftIdentityWebApi(configuration.GetSection(Appsettings.AzureAdSettings.SectionName), azureAdOptions.JwtBearerScheme);
+            .AddMicrosoftIdentityWebApi(configuration.GetSection(Appsettings.AzureAdSettings.SectionName), Appsettings.AzureAdSettings.JwtBearerScheme);
 
         services.AddAuthorization();
 
         return services;
     }
 
-    public static IServiceCollection AddConfigurationBinding(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddConfigurationBinding(this IServiceCollection services, IConfiguration configuration)
     {
         var jwtSettings = new Appsettings.JwtSettings();
         configuration.Bind(Appsettings.JwtSettings.SectionName, jwtSettings);
@@ -107,7 +107,6 @@ public static class ServiceCollectionExtensions
             .AddSingleton(Options.Create(jwtSettings))
             .AddSingleton(Options.Create(googleSettings))
             .AddSingleton(Options.Create(azureAdSettings));
-
 
         return services;
     }
