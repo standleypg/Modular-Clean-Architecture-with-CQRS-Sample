@@ -10,4 +10,4 @@ public record RegisterCommand(
     string FirstName,
     string LastName,
     string Email,
-    string Password): IRequireTransaction, IRequest<ErrorOr<AuthResult>>;
+    string? Password): IRequireTransaction, IRequest<ErrorOr<AuthResult>>;

@@ -1,4 +1,5 @@
 using RetailPortal.Domain.Entities;
+using RetailPortal.Domain.Entities.Common;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
 using RetailPortal.Infrastructure.Data.UnitOfWork;
 
@@ -62,7 +63,7 @@ public class RepositoryUtils : BaseRepositoryTests
     public static User CreateUser(int i)
     {
         var password = Password.Create([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
-        var user = User.Create($"Firstname {i}", $"Lastname {i}", $"{i}@email.com", password);
+        var user = User.Create($"Firstname {i}", $"Lastname {i}", $"{i}@email.com", TokenProvider.RetailPortalApp, password);
         return user;
     }
 }

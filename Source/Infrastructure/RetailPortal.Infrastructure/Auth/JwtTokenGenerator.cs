@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RetailPortal.Domain.Entities;
+using RetailPortal.Domain.Entities.Common;
 using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
 using RetailPortal.Domain.Interfaces.Infrastructure.Services;
 using RetailPortal.Shared.Constants;
@@ -17,7 +18,7 @@ public sealed class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptio
 
     public string GenerateToken(User user)
     {
-        var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._jwtSettings.Secret)), SecurityAlgorithms.HmacSha256);
+        var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._jwtSettings.Secret)), SecurityAlgorithms.HmacSha512);
 
         var claims = new[] {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
@@ -27,8 +28,8 @@ public sealed class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptio
         };
 
         var security = new JwtSecurityToken(
-            issuer: this._jwtSettings.Issuer,
-            audience: this._jwtSettings.Audience,
+            issuer: nameof(TokenProvider.RetailPortalApp),
+            audience: nameof(TokenProvider.RetailPortalApp),
             claims: claims,
             expires: dateTimeProvider.UtcNow.AddMinutes(this._jwtSettings.ExpirationMinutes),
             signingCredentials: signingCredentials

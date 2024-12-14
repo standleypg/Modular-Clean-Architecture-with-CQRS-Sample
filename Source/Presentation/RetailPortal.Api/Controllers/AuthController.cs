@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Auth.Commands;
 using RetailPortal.Application.Auth.Queries;
+using RetailPortal.Shared;
 using RetailPortal.Shared.Constants;
 using RetailPortal.Shared.DTOs.Auth;
+using System.Security.Claims;
 
 namespace RetailPortal.Api.Controllers;
 
@@ -46,10 +48,18 @@ public class AuthController(ISender mediator, IMapper mapper) : ODataBaseControl
     [Authorize(AuthenticationSchemes = Appsettings.AzureAdSettings.JwtBearerScheme)]
     public async Task<IActionResult> TokenExchange()
     {
-        await Task.CompletedTask;
-        // TODO: Implement token exchange logic for Google and Azure AD
-        // TODO: If the user is not yet registered, register the user
-        // TODO: If the user is already registered, update the user's information and return a new token
-        return this.Ok("Token exchange successful");
+        var user = this.User;
+        var provider = user.FindFirst(CustomClaimTypes.Iss)!.Value;
+        var name = user.FindFirst(CustomClaimTypes.Name)!.Value.AsSpan();
+        var email = user.FindFirst(CustomClaimTypes.Email)?.Value;
+        var firstName = name[..name.IndexOf(' ')];
+        var lastName = name[name.IndexOf(' ')..];
+        return this.Ok(new
+        {
+            Email = email,
+            FirsName = firstName.ToString(),
+            LastName = lastName.ToString(),
+            Provider = provider.Contains(nameof(IssProvider.Google), StringComparison.OrdinalIgnoreCase) ? nameof(IssProvider.Google) : nameof(IssProvider.Azure)
+        });
     }
 }
