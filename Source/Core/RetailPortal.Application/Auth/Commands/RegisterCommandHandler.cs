@@ -14,7 +14,7 @@ using RetailPortal.Shared.Constants;
 
 namespace RetailPortal.Application.Auth.Commands;
 
-public class RegisterCommandHanlder(
+public class RegisterCommandHandler(
     IUnitOfWork uow,
     IJwtTokenGenerator jwtTokenGenerator,
     IPasswordHasher passwordHasher) : BaseHandler(uow), IRequestHandler<RegisterCommand, ErrorOr<AuthResult>>
