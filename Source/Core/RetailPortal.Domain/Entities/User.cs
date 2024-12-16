@@ -31,7 +31,7 @@ public sealed class User : EntityBase
         this.Roles = new List<Role>();
     }
 
-    public static User Create(string firstName, string lastName, string email, TokenProvider tokenProvider, Password password)
+    public static User Create(string firstName, string lastName, string email, TokenProvider tokenProvider, Password? password = null)
     {
         return new User(firstName, lastName, email,  tokenProvider, password);
     }

@@ -69,8 +69,8 @@ public static class ServiceCollectionExtensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = nameof(TokenProvider.RetailPortalApp),
-                    ValidAudience = nameof(TokenProvider.RetailPortalApp),
+                    ValidIssuer = TokenProvider.RetailPortalApp.ToString(),
+                    ValidAudience = TokenProvider.RetailPortalApp.ToString(),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
                 };
             })
@@ -87,13 +87,13 @@ public static class ServiceCollectionExtensions
                     ValidateLifetime = true,
                 };
 
-                JwtEventsHandler(options, nameof(TokenProvider.Google));
+                JwtEventsHandler(options, TokenProvider.Google.ToString());
             })
             .AddMicrosoftIdentityWebApi(options =>
             {
                 configuration.Bind(Appsettings.AzureAdSettings.SectionName, options);
 
-                JwtEventsHandler(options, nameof(TokenProvider.Microsoft));
+                JwtEventsHandler(options, TokenProvider.Microsoft.ToString());
             }, options =>
             {
                 configuration.Bind(Appsettings.AzureAdSettings.SectionName, options);

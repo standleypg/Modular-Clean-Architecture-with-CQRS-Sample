@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using RetailPortal.Api.Controllers.Common;
 using RetailPortal.Application.Auth.Commands;
 using RetailPortal.Application.Auth.Queries;
-using RetailPortal.Shared;
 using RetailPortal.Shared.Constants;
 using RetailPortal.Shared.DTOs.Auth;
-using System.Security.Claims;
 
 namespace RetailPortal.Api.Controllers;
 
@@ -48,18 +46,11 @@ public class AuthController(ISender mediator, IMapper mapper) : ODataBaseControl
     [Authorize(AuthenticationSchemes = Appsettings.AzureAdSettings.JwtBearerScheme)]
     public async Task<IActionResult> TokenExchange()
     {
-        var user = this.User;
-        var provider = user.FindFirst(CustomClaimTypes.Iss)!.Value;
-        var name = user.FindFirst(CustomClaimTypes.Name)!.Value.AsSpan();
-        var email = user.FindFirst(CustomClaimTypes.Email)?.Value;
-        var firstName = name[..name.IndexOf(' ')];
-        var lastName = name[name.IndexOf(' ')..];
-        return this.Ok(new
-        {
-            Email = email,
-            FirsName = firstName.ToString(),
-            LastName = lastName.ToString(),
-            Provider = provider.Contains(nameof(IssProvider.Google), StringComparison.OrdinalIgnoreCase) ? nameof(IssProvider.Google) : nameof(IssProvider.Azure)
-        });
+        var result = await mediator.Send(mapper.Map<TokenExchangeCommand>(this.User));
+
+        return result.Match(
+            authResult => this.Ok(mapper.Map<AuthResponse>(authResult)),
+            this.Problem
+        );
     }
 }

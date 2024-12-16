@@ -28,8 +28,8 @@ public sealed class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptio
         };
 
         var security = new JwtSecurityToken(
-            issuer: nameof(TokenProvider.RetailPortalApp),
-            audience: nameof(TokenProvider.RetailPortalApp),
+            issuer: TokenProvider.RetailPortalApp.ToString(),
+            audience: TokenProvider.RetailPortalApp.ToString(),
             claims: claims,
             expires: dateTimeProvider.UtcNow.AddMinutes(this._jwtSettings.ExpirationMinutes),
             signingCredentials: signingCredentials

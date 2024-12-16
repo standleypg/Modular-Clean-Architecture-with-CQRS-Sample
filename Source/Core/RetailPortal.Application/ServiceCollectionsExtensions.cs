@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using RetailPortal.Application.Common;
+using RetailPortal.Application.Services.Role;
+using RetailPortal.Domain.Interfaces.Application.Services;
 using System.Reflection;
 
 namespace RetailPortal.Application;
@@ -11,6 +13,9 @@ public static class ServiceCollectionsExtensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddMediatR();
+
+        services
+            .AddScoped<IRoleService, RoleServices>();
 
         return services;
     }

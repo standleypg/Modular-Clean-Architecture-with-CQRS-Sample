@@ -20,7 +20,7 @@ public class LoginQueryHandler(IUnitOfWork uow, IPasswordHasher passwordHasher, 
             return Errors.Auth.InvalidCredentials();
         }
 
-        if (!passwordHasher.VerifyPasswordHash(query.Password, user.Password.PasswordHash, user.Password.PasswordSalt))
+        if (!passwordHasher.VerifyPasswordHash(query.Password, user.Password!.PasswordHash, user.Password!.PasswordSalt))
         {
             return new[] { Errors.Auth.InvalidCredentials() }; // just an example of returning list of errors
         }
