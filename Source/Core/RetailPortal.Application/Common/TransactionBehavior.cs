@@ -17,18 +17,18 @@ public class TransactionBehavior<TRequest, TResponse>(IUnitOfWork uow)
             return await next();
         }
 
-        await this.Uow.BeginTransactionAsync();
+        await this.Uow.BeginTransactionAsync(cancellationToken);
 
         try
         {
             var response = await next();
 
-            await this.Uow.CommitAsync();
+            await this.Uow.CommitAsync(cancellationToken);
             return response;
         }
         catch (Exception)
         {
-            await this.Uow.RollbackAsync();
+            await this.Uow.RollbackAsync(cancellationToken);
             throw;
         }
     }

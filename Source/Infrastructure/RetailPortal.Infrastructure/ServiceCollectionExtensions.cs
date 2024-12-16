@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
+using RetailPortal.Domain.Entities.Common;
 using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
 using RetailPortal.Domain.Interfaces.Infrastructure.Data.Repositories;
 using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
@@ -15,7 +16,9 @@ using RetailPortal.Infrastructure.Data.Context;
 using RetailPortal.Infrastructure.Data.Repositories;
 using RetailPortal.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Infrastructure.Services;
+using RetailPortal.Shared;
 using RetailPortal.Shared.Constants;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace RetailPortal.Infrastructure;
@@ -66,8 +69,8 @@ public static class ServiceCollectionExtensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtOptions.Issuer,
-                    ValidAudience = jwtOptions.Audience,
+                    ValidIssuer = TokenProvider.RetailPortalApp.ToString(),
+                    ValidAudience = TokenProvider.RetailPortalApp.ToString(),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
                 };
             })
@@ -83,12 +86,44 @@ public static class ServiceCollectionExtensions
                     ValidAudience = googleOptions.ClientId,
                     ValidateLifetime = true,
                 };
+
+                JwtEventsHandler(options, TokenProvider.Google.ToString());
             })
-            .AddMicrosoftIdentityWebApi(configuration.GetSection(Appsettings.AzureAdSettings.SectionName), Appsettings.AzureAdSettings.JwtBearerScheme);
+            .AddMicrosoftIdentityWebApi(options =>
+            {
+                configuration.Bind(Appsettings.AzureAdSettings.SectionName, options);
+
+                JwtEventsHandler(options, TokenProvider.Microsoft.ToString());
+            }, options =>
+            {
+                configuration.Bind(Appsettings.AzureAdSettings.SectionName, options);
+            }, Appsettings.AzureAdSettings.JwtBearerScheme);
 
         services.AddAuthorization();
 
         return services;
+
+        static void JwtEventsHandler(JwtBearerOptions options, string provider)
+        {
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    // if Request.Header.Token is not from Google, skip the entire process
+                    var issuer = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ')[1];
+                    var token = new JwtSecurityToken(issuer);
+                    var isTrue = token.Claims.Select(c => c.Issuer).First().Contains(provider, StringComparison.OrdinalIgnoreCase);
+
+                    if(!isTrue)
+                    {
+                        context.NoResult();
+                        return Task.CompletedTask;
+                    }
+
+                    return Task.CompletedTask;
+                },
+            };
+        }
     }
 
     private static IServiceCollection AddConfigurationBinding(this IServiceCollection services, IConfiguration configuration)

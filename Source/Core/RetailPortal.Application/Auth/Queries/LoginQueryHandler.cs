@@ -9,7 +9,7 @@ using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 
 namespace RetailPortal.Application.Auth.Queries;
 
-public class LoginQueryHanlder(IUnitOfWork uow, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
+public class LoginQueryHandler(IUnitOfWork uow, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
     : BaseHandler(uow), IRequestHandler<LoginQuery, ErrorOr<AuthResult>>
 {
     public async Task<ErrorOr<AuthResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
@@ -20,7 +20,7 @@ public class LoginQueryHanlder(IUnitOfWork uow, IPasswordHasher passwordHasher, 
             return Errors.Auth.InvalidCredentials();
         }
 
-        if (!passwordHasher.VerifyPasswordHash(query.Password, user.Password.PasswordHash, user.Password.PasswordSalt))
+        if (!passwordHasher.VerifyPasswordHash(query.Password, user.Password!.PasswordHash, user.Password!.PasswordSalt))
         {
             return new[] { Errors.Auth.InvalidCredentials() }; // just an example of returning list of errors
         }

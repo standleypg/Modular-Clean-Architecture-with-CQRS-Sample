@@ -1,3 +1,4 @@
+using RetailPortal.Domain.Entities.Common;
 using RetailPortal.Domain.Entities.Common.Base;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
 using System.Text.Json.Serialization;
@@ -9,29 +10,30 @@ public sealed class User : EntityBase
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string Email { get; private set; }
-    public Password Password { get; private set; }
+    public Password? Password { get; private set; }
+    public TokenProvider TokenProvider { get; private set; }
     public Guid? SellerId { get; private set; }
     public Seller? Seller { get; private set; }
-
     [JsonIgnore] public ICollection<Address> Addresses { get; private set; }
     [JsonIgnore] public ICollection<Role> Roles { get; private set; }
 
     // Whenever there is ValueObject, parameterless private constructor is required
     private User() { }
 
-    private User(string firstName, string lastName, string email, Password password)
+    private User(string firstName, string lastName, string email, TokenProvider tokenProvider, Password? password = null)
     {
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;
+        this.TokenProvider = tokenProvider;
         this.Password = password;
         this.Addresses = new List<Address>();
         this.Roles = new List<Role>();
     }
 
-    public static User Create(string firstName, string lastName, string email, Password password)
+    public static User Create(string firstName, string lastName, string email, TokenProvider tokenProvider, Password? password = null)
     {
-        return new User(firstName, lastName, email, password);
+        return new User(firstName, lastName, email,  tokenProvider, password);
     }
 
     public void AddRole(Role role)

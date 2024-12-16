@@ -29,14 +29,20 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
         {
             passwordBuilder.Property(p => p.PasswordHash)
                 .HasColumnName("PasswordHash")
-                .IsRequired();
+                .IsRequired(false)
+                .HasDefaultValue(null);
 
             passwordBuilder.Property(p => p.PasswordSalt)
                 .HasColumnName("PasswordSalt")
-                .IsRequired();
+                .IsRequired(false)
+                .HasDefaultValue(null);
 
             passwordBuilder.ToTable("Users");
         });
+
+        builder.Property(u => u.TokenProvider)
+            .IsRequired()
+            .HasConversion<string>();
 
         builder.HasMany(u=>u.Addresses)
             .WithOne(a=>a.User)
