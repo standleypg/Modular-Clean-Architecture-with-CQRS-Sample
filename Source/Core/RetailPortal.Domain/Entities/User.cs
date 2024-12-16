@@ -20,7 +20,7 @@ public sealed class User : EntityBase
     // Whenever there is ValueObject, parameterless private constructor is required
     private User() { }
 
-    private User(string firstName, string lastName, string email, TokenProvider tokenProvider, Password? password = null)
+    private User(string firstName, string lastName, string email, TokenProvider tokenProvider = TokenProvider.RetailPortalApp, Password? password = null)
     {
         this.FirstName = firstName;
         this.LastName = lastName;
@@ -31,9 +31,14 @@ public sealed class User : EntityBase
         this.Roles = new List<Role>();
     }
 
-    public static User Create(string firstName, string lastName, string email, TokenProvider tokenProvider, Password? password = null)
+    public static User Create(string firstName, string lastName, string email, Password password)
     {
-        return new User(firstName, lastName, email,  tokenProvider, password);
+        return new User(firstName, lastName, email, password: password);
+    }
+
+    public static User Create(string firstName, string lastName, string email, TokenProvider tokenProvider)
+    {
+        return new User(firstName, lastName, email, tokenProvider);
     }
 
     public void AddRole(Role role)

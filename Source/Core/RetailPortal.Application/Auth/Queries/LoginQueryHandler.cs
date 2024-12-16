@@ -14,6 +14,9 @@ public class LoginQueryHandler(IUnitOfWork uow, IPasswordHasher passwordHasher, 
 {
     public async Task<ErrorOr<AuthResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
+        // TODO: Users that register with Google or Azure AD will not have a password
+        // TODO: Implement a way to handle this scenario
+
         await Task.CompletedTask;
         if (this.Uow.UserRepository.GetUserByEmail(query.Email) is not { } user)
         {
