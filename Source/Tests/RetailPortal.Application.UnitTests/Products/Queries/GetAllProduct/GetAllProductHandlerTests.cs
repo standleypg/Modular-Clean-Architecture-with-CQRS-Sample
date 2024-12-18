@@ -12,11 +12,11 @@ public sealed class GetAllProductHandlerTests : IDisposable
     private readonly Mock<IUnitOfWork> _mockUow;
     private readonly Mock<IProductRepository> _mockProductRepository;
     private readonly GetAllProductHandler _handler;
-    private readonly RepositoryUtils _repositoryUtils;
+    private readonly RepositoryUtils _sut;
 
     public GetAllProductHandlerTests()
     {
-        this._repositoryUtils = new RepositoryUtils();
+        this._sut = new RepositoryUtils();
         this._mockProductRepository = new Mock<IProductRepository>();
         this._mockUow = new Mock<IUnitOfWork>();
         this._mockUow.Setup(u => u.ProductRepository).Returns(this._mockProductRepository.Object);
@@ -29,7 +29,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this._sut.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
@@ -48,7 +48,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 0;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this._sut.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
@@ -67,7 +67,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount, includeSelectQuery: true);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this._sut.CreateQueryableMockProducts(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
@@ -79,7 +79,7 @@ public sealed class GetAllProductHandlerTests : IDisposable
 
     public void Dispose()
     {
-        this._repositoryUtils.Dispose();
+        this._sut.Dispose();
         GC.SuppressFinalize(this);
     }
 
