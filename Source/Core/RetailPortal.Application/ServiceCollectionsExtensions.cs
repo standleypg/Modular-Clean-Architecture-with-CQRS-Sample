@@ -15,7 +15,7 @@ public static class ServiceCollectionsExtensions
         services.AddMediatR();
 
         services
-            .AddScoped<IRoleService, RoleServices>();
+            .AddScoped<IRoleService, RoleService>();
 
         return services;
     }

@@ -6,7 +6,7 @@ using RetailPortal.Shared.Constants;
 
 namespace RetailPortal.Application.Services.Role;
 
-public class RoleServices(IUnitOfWork uow) : BaseHandler(uow), IRoleService
+public class RoleService(IUnitOfWork uow) : BaseHandler(uow), IRoleService
 {
     public async Task<List<Domain.Entities.Role>> GetAllRolesAsync()
     {

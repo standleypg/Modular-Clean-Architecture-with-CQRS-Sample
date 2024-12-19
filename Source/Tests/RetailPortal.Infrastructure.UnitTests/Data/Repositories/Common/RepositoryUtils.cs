@@ -1,7 +1,10 @@
 using RetailPortal.Domain.Entities;
-using RetailPortal.Domain.Entities.Common;
+using RetailPortal.Domain.Entities.Common.Base;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.Repositories;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Infrastructure.Data.UnitOfWork;
+using RetailPortal.Shared.Constants;
 
 namespace RetailPortal.Infrastructure.UnitTests.Data.Repositories.Common;
 
@@ -14,17 +17,40 @@ public class RepositoryUtils : BaseRepositoryTests
         this._uow = new UnitOfWork(Context);
     }
 
-    public async Task<IQueryable<Product>> CreateQueryableMockProducts(int count = 1,
-        CancellationToken cancellationToken = default)
+    public async Task<IQueryable<TEntity>> CreateQueryableMockEntities<TEntity>(
+        Func<int, TEntity> createEntity,
+        Func<IUnitOfWork, IGenericRepository<TEntity>> resolveRepository,
+        int count = 1,
+        CancellationToken cancellationToken = default) where TEntity : EntityBase
     {
-        await CreateEntity(CreateProduct, async (product, token) =>
-            {
-                await this._uow.ProductRepository.AddAsync(product, token);
-                await this._uow.SaveChangesAsync(cancellationToken);
-            }, count,
-            cancellationToken);
+        var repository = resolveRepository(this._uow);
 
-        return this._uow.ProductRepository.GetAll();
+        for (int i = 0; i < count; i++)
+        {
+            var entity = createEntity(i);
+            await repository.AddAsync(entity, cancellationToken);
+        }
+
+        await this._uow.SaveChangesAsync(cancellationToken);
+
+        return repository.GetAll();
+    }
+
+    public async Task<IQueryable<TEntity>> CreateQueryableMockEntities<TEntity>(
+        List<TEntity> entities,
+        Func<IUnitOfWork, IGenericRepository<TEntity>> resolveRepository,
+        CancellationToken cancellationToken = default) where TEntity : EntityBase
+    {
+        var repository = resolveRepository(this._uow);
+
+        foreach (var entity in entities)
+        {
+            await repository.AddAsync(entity, cancellationToken);
+        }
+
+        await this._uow.SaveChangesAsync(cancellationToken);
+
+        return repository.GetAll();
     }
 
     public static async Task CreateEntity<T>(Func<int, T> createEntity, Func<T, CancellationToken, Task>? execute, int count = 1,

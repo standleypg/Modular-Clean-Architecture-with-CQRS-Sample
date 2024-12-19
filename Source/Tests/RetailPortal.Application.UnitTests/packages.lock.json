@@ -38,6 +38,16 @@
           "Castle.Core": "5.1.1"
         }
       },
+      "Moq.EntityFrameworkCore": {
+        "type": "Direct",
+        "requested": "[8.0.1.2, )",
+        "resolved": "8.0.1.2",
+        "contentHash": "LAgsu4wwRLlUjM8+t0FFwk4hy7of4BfeKqe52UUfXNaDKYUzYCZqwTcId1dB3FHiuailsmowei6lej1t//d8Ng==",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.1",
+          "Moq": "4.20.70"
+        }
+      },
       "xunit": {
         "type": "Direct",
         "requested": "[2.9.2, )",

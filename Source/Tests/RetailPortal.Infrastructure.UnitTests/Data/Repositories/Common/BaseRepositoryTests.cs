@@ -12,16 +12,16 @@ public class BaseRepositoryTests: IDisposable
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: $"RetailPortal-{Guid.NewGuid().ToString()}")
             .Options;
-        
-        Context = new ApplicationDbContext(options);
-        
-        Context.Database.EnsureCreated();
-        Context.Database.EnsureDeleted();
+
+        this.Context = new ApplicationDbContext(options);
+
+        this.Context.Database.EnsureCreated();
+        this.Context.Database.EnsureDeleted();
     }
 
     public void Dispose()
     {
-        Dispose(true);
+        this.Dispose(true);
         GC.SuppressFinalize(this);
     }
 
@@ -29,12 +29,12 @@ public class BaseRepositoryTests: IDisposable
     {
         if (disposing)
         {
-            Context.Dispose();
+            this.Context.Dispose();
         }
     }
 
     ~BaseRepositoryTests()
     {
-        Dispose(false);
+        this.Dispose(false);
     }
 }
