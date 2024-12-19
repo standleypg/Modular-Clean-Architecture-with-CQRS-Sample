@@ -10,17 +10,16 @@ namespace RetailPortal.Unit.Products.Queries.GetAllProduct;
 public sealed class GetAllProductHandlerTests : IDisposable
 {
     private readonly Mock<IUnitOfWork> _mockUow;
-    private readonly Mock<IProductRepository> _mockProductRepository;
-    private readonly GetAllProductHandler _handler;
+    private readonly GetAllProductHandler _sut;
     private readonly RepositoryUtils _repositoryUtils;
 
     public GetAllProductHandlerTests()
     {
+        Mock<IProductRepository> mockProductRepository = new();
         this._repositoryUtils = new RepositoryUtils();
-        this._mockProductRepository = new Mock<IProductRepository>();
         this._mockUow = new Mock<IUnitOfWork>();
-        this._mockUow.Setup(u => u.ProductRepository).Returns(this._mockProductRepository.Object);
-        this._handler = new GetAllProductHandler(this._mockUow.Object);
+        this._mockUow.Setup(u => u.ProductRepository).Returns(mockProductRepository.Object);
+        this._sut = new GetAllProductHandler(this._mockUow.Object);
     }
 
     [Fact]
@@ -29,11 +28,11 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this.CreateQueryableProductMockEntities(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
-        var result = await this._handler.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
+        var result = await this._sut.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
 
         // Assert
         var response = result.Value;
@@ -48,11 +47,11 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 0;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this.CreateQueryableProductMockEntities(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
-        var result = await this._handler.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
+        var result = await this._sut.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
 
         // Assert
         var response = result.Value;
@@ -67,14 +66,23 @@ public sealed class GetAllProductHandlerTests : IDisposable
         // Arrange
         var productCount = 10;
         var queryOptions = TestUtils.ODataQueryOptionsUtils<Product>(productCount, includeSelectQuery: true);
-        var products = await this._repositoryUtils.CreateQueryableMockProducts(productCount);
+        var products = await this.CreateQueryableProductMockEntities(productCount);
 
         // Act
         this._mockUow.Setup(r => r.ProductRepository.GetAll()).Returns(products);
-        var result = await this._handler.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
+        var result = await this._sut.Handle(new GetAllProductCommand(queryOptions), It.IsAny<CancellationToken>());
 
         // Assert
         Assert.True(result.IsError);
+    }
+
+    private Task<IQueryable<Product>> CreateQueryableProductMockEntities(int productCount)
+    {
+        return this._repositoryUtils.CreateQueryableMockEntities(
+            RepositoryUtils.CreateProduct,
+            uow => uow.ProductRepository,
+            productCount
+        );
     }
 
     public void Dispose()
