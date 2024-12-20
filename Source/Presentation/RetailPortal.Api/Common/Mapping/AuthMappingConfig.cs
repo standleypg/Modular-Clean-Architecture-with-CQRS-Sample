@@ -1,5 +1,6 @@
 using AutoMapper;
-using RetailPortal.Application.Auth.Commands;
+using RetailPortal.Application.Auth.Commands.RegisterCommand;
+using RetailPortal.Application.Auth.Commands.TokenExchange;
 using RetailPortal.Application.Auth.Common;
 using RetailPortal.Application.Auth.Queries;
 using RetailPortal.Shared.Constants;
