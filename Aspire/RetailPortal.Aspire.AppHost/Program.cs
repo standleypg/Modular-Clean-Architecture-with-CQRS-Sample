@@ -1,6 +1,9 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddPostgres("retailportal-db")
+// This db created by Aspire isn't the same as the one we run manually using docker-compose.
+// Choose only one of the two.
+// If you want to use the one created by Aspire, skip the docker-compose command and vice versa.
+var postgres = builder.AddPostgres("RetailPortalDb")
     .WithDataVolume()
     .WithPgAdmin();
 

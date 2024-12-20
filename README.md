@@ -1,8 +1,8 @@
-# Modular Clean Architecture With CQRS Implementation Template
+# Clean Architecture With CQRS Implementation and OData Endpoints Template
 
 ## Disclaimer
 
-**🚨 Template Disclaimer: This sample application is still in progress**
+**🚨 Disclaimer: This sample application is still in progress**
 
 This repository provides a comprehensive template for implementing a Modular Clean Architecture with CQRS and OData integration. It serves as a starting point and best-practice reference for building scalable, maintainable .NET applications with advanced querying capabilities.
 
@@ -12,17 +12,18 @@ This repository provides a comprehensive template for implementing a Modular Cle
 
 1. Install .NET 9 SDK or later
 2. Install Docker Desktop
-3. Docker Compose is provided for running the database (this docker orchestration recently replaced by `.NET Aspire`)
-4. Keeping this docker-compose for now (will be removed in future)
-   - In case want to use Docker Compose, just simply run the following command:
+3. There are two ways to run the database:
+   - Using Docker Compose
+   - Using `.NET Aspire` 
+   - **Recommended**: Use the one you are comfortable with. `.NET Aspire` is a new tool that provides a better way to manage the database and other services. It includes OpenTelemetry by default for tracing and monitoring.
+   - **Skip** Docker Compose step if you are using `.NET Aspire` to manage application database and vice versa.
+3. Docker Compose is provided for running the database.
+4. For Docker Compose, run the following command:
 ```bash
-# run the database
-# cd to Docker folder
-docker compose -f docker-compose.yml -p docker up -d postgres
+cd Docker
+docker compose -p docker up -d postgres
 ```
-5. `.NET Aspire` is a new tool that provides a better way to manage the database and other services. It includes  OpenTelemetry by default for tracing and monitoring.
-   - **Skip** Docker Compose step if you are using `.NET Aspire` to manage application services and database.
-6. For OData request examples, refer to `Documents/Api.http`. For more information, refer to the [OData documentation](https://learn.microsoft.com/en-us/odata/).
+5For OData request examples, refer to `Documents/Api.http`. For more information, refer to the [OData documentation](https://learn.microsoft.com/en-us/odata/).
 
 ## Template Structure Overview
 
