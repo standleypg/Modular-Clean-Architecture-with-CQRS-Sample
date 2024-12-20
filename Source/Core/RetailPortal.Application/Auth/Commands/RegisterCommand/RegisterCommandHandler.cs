@@ -1,16 +1,16 @@
+using ErrorOr;
 using MediatR;
 using RetailPortal.Application.Auth.Common;
 using RetailPortal.Application.Common;
-using RetailPortal.Domain.Entities;
-using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
-using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
-using ErrorOr;
 using RetailPortal.Domain.Common;
+using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Entities.Common.ValueObjects;
 using RetailPortal.Domain.Interfaces.Application.Services;
+using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
+using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Shared.Constants;
 
-namespace RetailPortal.Application.Auth.Commands;
+namespace RetailPortal.Application.Auth.Commands.RegisterCommand;
 
 public class RegisterCommandHandler(
     IUnitOfWork uow,
@@ -18,7 +18,7 @@ public class RegisterCommandHandler(
     IJwtTokenGenerator jwtTokenGenerator,
     IPasswordHasher passwordHasher) : BaseHandler(uow), IRequestHandler<RegisterCommand, ErrorOr<AuthResult>>
 {
-    public async Task<ErrorOr<AuthResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<AuthResult>> Handle(Commands.RegisterCommand.RegisterCommand command, CancellationToken cancellationToken)
     {
         if (this.Uow.UserRepository.GetUserByEmail(command.Email) is not null)
             return Errors.User.DuplicateEmail();

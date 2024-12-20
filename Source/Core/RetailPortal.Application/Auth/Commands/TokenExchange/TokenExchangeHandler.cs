@@ -9,13 +9,12 @@ using RetailPortal.Domain.Interfaces.Infrastructure.Auth;
 using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
 using RetailPortal.Shared.Constants;
 
-namespace RetailPortal.Application.Auth.Commands;
+namespace RetailPortal.Application.Auth.Commands.TokenExchange;
 
 public class TokenExchangeHandler(
     IUnitOfWork uow,
     IRoleService roleService,
-    IJwtTokenGenerator jwtTokenGenerator,
-    IPasswordHasher passwordHasher)
+    IJwtTokenGenerator jwtTokenGenerator)
     : BaseHandler(uow), IRequestHandler<TokenExchangeCommand, ErrorOr<AuthResult>>
 {
     public async Task<ErrorOr<AuthResult>> Handle(TokenExchangeCommand request, CancellationToken cancellationToken)

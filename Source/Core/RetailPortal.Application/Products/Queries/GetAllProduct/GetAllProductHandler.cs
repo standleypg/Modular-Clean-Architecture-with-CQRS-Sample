@@ -1,6 +1,5 @@
 using ErrorOr;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using RetailPortal.Application.Common;
 using RetailPortal.Domain.Entities;
 using RetailPortal.Domain.Interfaces.Infrastructure.Data.UnitOfWork;
@@ -18,7 +17,7 @@ public class GetAllProductHandler(IUnitOfWork uow)
 
         var products = this.Uow.ProductRepository.GetAll();
 
-        var oDataResponse = await products.GetODataResponseAsync(options);
+        var oDataResponse = await products.GetODataResponseAsync(options, cancellationToken);
 
         return oDataResponse;
     }

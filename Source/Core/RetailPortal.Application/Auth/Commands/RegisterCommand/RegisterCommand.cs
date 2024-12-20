@@ -1,10 +1,9 @@
-using MediatR;
 using ErrorOr;
+using MediatR;
 using RetailPortal.Application.Auth.Common;
 using RetailPortal.Application.Common;
-using RetailPortal.Domain.Entities;
 
-namespace RetailPortal.Application.Auth.Commands;
+namespace RetailPortal.Application.Auth.Commands.RegisterCommand;
 
 public record RegisterCommand(
     string FirstName,

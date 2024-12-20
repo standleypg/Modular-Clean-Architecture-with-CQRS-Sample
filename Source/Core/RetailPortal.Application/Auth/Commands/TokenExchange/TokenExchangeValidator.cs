@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RetailPortal.Application.Auth.Commands;
+namespace RetailPortal.Application.Auth.Commands.TokenExchange;
 
 public class TokenExchangeValidator: AbstractValidator<TokenExchangeCommand>
 {
