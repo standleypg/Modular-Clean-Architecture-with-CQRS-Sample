@@ -49,7 +49,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("retailportal-db"));
+            options.UseNpgsql(configuration.GetConnectionString("RetailPortalDb"));
         });
 
         return services;
