@@ -12,6 +12,10 @@ declare namespace RetailPortal.Shared.DTOs.Auth {
 		lastName: string;
 		token: string;
 	}
+	export interface iLoginRequest {
+		email: string;
+		password: string;
+	}
 	export interface iRegisterRequest {
 		email: string;
 		firstName: string;

@@ -15,14 +15,10 @@
       <PackageReference Include="TypeLitePlus" Version="2.1.0" />
     </ItemGroup>
 
-<!--    <Target Name="GenerateTypeScript" AfterTargets="Build">-->
-<!--      <Exec Command="dotnet run &#45;&#45;project ../CodeGen/CodeGen.csproj" />-->
-<!--    </Target>-->
-
     <ItemGroup>
       <None Update="typescriptgenconfig.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
-  
+
 </Project>
