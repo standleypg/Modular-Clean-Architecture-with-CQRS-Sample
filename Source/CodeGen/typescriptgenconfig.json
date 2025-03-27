@@ -1,0 +1,35 @@
+﻿{
+  "outputPath": "../Presentation/App/src/app/shared/common/",
+  "outputFileName": "model.ts",
+  "namespaces": [
+    {
+      "namespace": "RetailPortal.Shared.DTOs.Product",
+      "includeDtos": [
+        "ProductResponse"
+      ]
+    }
+  ],
+  "ignoreTypes": [
+    "System.Guid",
+    "System.DateTime",
+    "System.DateTimeOffset",
+    "System.TimeSpan",
+    "System.Uri",
+    "System.Collections.Generic.IList",
+    "System.Collections.Generic.List",
+    "System.Collections.Generic.ICollection",
+    "System.Collections.Generic.IEnumerable",
+    "System.Collections.Generic.IEnumerable`1",
+    "System.Collections.Generic.IReadOnlyCollection",
+    "System.Collections.Generic.IReadOnlyList",
+    "System.Collections.Generic.IReadOnlyDictionary",
+    "System.Collections.Generic.IDictionary",
+    "System.Collections.Generic.Dictionary",
+    "System.Collections.Generic.KeyValuePair",
+    "System.Collections.Generic.IEnumerator",
+    "System.Collections.Generic.IEnumerator`1",
+    "System.Collections.IEnumerable",
+    "System.Collections.IEnumerator",
+    "System.Collections.IEnumerator"
+  ]
+}

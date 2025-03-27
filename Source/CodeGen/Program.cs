@@ -1,0 +1,3 @@
+﻿using CodeGen;
+
+TypeScriptGenerator.GenerateTypeScript();
