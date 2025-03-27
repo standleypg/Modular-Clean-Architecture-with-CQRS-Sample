@@ -1,5 +1,5 @@
 declare namespace RetailPortal.Shared {
-	export const enum iIssProvider {
+	export enum iIssProvider {
 		Google = 0,
 		Azure = 1
 	}

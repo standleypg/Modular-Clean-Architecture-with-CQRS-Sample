@@ -101,6 +101,7 @@ public class TypeScriptGenerator
         var tsCode = generator.Generate(model, TsGeneratorOutput.Properties | TsGeneratorOutput.Enums);
         tsCode = Regex.Replace(tsCode, @"declare\s+namespace\s+System\s*{\s*interface\s+iGuid\s*{\s*}\s*}",
             string.Empty).Trim();
+        tsCode = tsCode.Replace("export const enum", "export enum", StringComparison.InvariantCultureIgnoreCase);
         var baseDirectory = Directory.GetParent(AppContext.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
 
         if (baseDirectory == null)
